@@ -11,6 +11,7 @@ import AuthContext from '../../context/AuthContext';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [hoveredLink, setHoveredLink] = useState(null);
   const location = useLocation();
   const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
@@ -19,6 +20,30 @@ export default function Navbar() {
     navigate('/Login');
     authCtx.logout();
   };
+
+  useEffect(() => {
+    const links = document.querySelectorAll(`.${style.navLink} a`);
+    
+    const handleMouseOver = (event) => {
+      setHoveredLink(event.target);
+    };
+
+    const handleMouseOut = () => {
+      setHoveredLink(null);
+    };
+
+    links.forEach(link => {
+      link.addEventListener('mouseover', handleMouseOver);
+      link.addEventListener('mouseout', handleMouseOut);
+    });
+
+    return () => {
+      links.forEach(link => {
+        link.removeEventListener('mouseover', handleMouseOver);
+        link.removeEventListener('mouseout', handleMouseOut);
+      });
+    };
+  }, []);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -56,13 +81,13 @@ export default function Navbar() {
   const listVariants = {
     hidden: { opacity: 0, x: -100 },
     visible: { opacity: 1, x: 0 },
-    exit: { opacity: 0, x: -100 } // Adjusted for exit animation
+    exit: { opacity: 0, x: -100 }
   };
 
   const containerVariants = {
     hidden: { opacity: 0, scale: 0.8 },
     visible: { opacity: 1, scale: 1 },
-    exit: { opacity: 0, scale: 0.8, y: 50 } // Adjusted for exit animation
+    exit: { opacity: 0, scale: 0.8, y: 50 }
   };
 
   return (
@@ -70,16 +95,11 @@ export default function Navbar() {
       <nav className={style.nav}>
         <div className={style.mobile}>
           <div className={style.icon} onClick={toggleMenu}>
-            {isOpen ? <RxCross2 size={20} /> : <FiMenu size={20} />}
+            {isOpen ? <RxCross2 size={24} /> : <FiMenu size={24} />}
           </div>
           <div className={`${style.logoContainer} ${isOpen ? style.blur : ""}`}>
             <Link to="/" onClick={handleLogoClick}>
-              <img
-                loading="lazy"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/8a723ff2a5558303e924c50f292f82cb2d54f7fbdbc1f67d588b9a73daaf2c16?apiKey=e259011a0b7e4d6e8e6cd8c4440eea14&"
-                alt="Logo"
-                className={style.logo}
-              />
+              <h1 className={`${style.fedtitle} ${isOpen ? style.blur : ""}`}>FED</h1>
             </Link>
           </div>
         </div>
@@ -91,7 +111,7 @@ export default function Navbar() {
             animate="visible"
             exit="exit"
             variants={containerVariants}
-            transition={{ duration: 0.5, ease: "easeInOut" }} // Added easing function
+            transition={{ duration: 0.5, ease: "easeInOut" }}
           >
             <ul className={`${style.navItems} ${isOpen ? style.open : ""}`}>
               {authCtx.isLoggedIn && (
@@ -112,11 +132,15 @@ export default function Navbar() {
                 animate="visible"
                 exit="exit"
                 variants={listVariants}
-                transition={{ duration: 0.5, ease: "easeInOut", delay: 0.1 }} // Added easing function and exit duration
+                transition={{ duration: 0.5, ease: "easeInOut", delay: 0.1 }}
               >
                 <Link
                   to="/"
-                  style={{ color: isActive("/") ? "#FF8A00" : "white" }}
+                  style={{ 
+                    background: isActive("/") ? "var(--primary)" : (hoveredLink && hoveredLink.href.endsWith('/')) ? "var(--primary)" : "transparent",
+                    WebkitBackgroundClip: isActive("/") ? "text" : (hoveredLink && hoveredLink.href.endsWith('/')) ? "text" : "initial",
+                    color: isActive("/") ? "transparent" :(hoveredLink && hoveredLink.href.endsWith('/')) ? "transparent" : "inherit"
+                  }}
                   onClick={toggleMenu}
                 >
                   Home
@@ -128,11 +152,15 @@ export default function Navbar() {
                 animate="visible"
                 exit="exit"
                 variants={listVariants}
-                transition={{ duration: 0.5, ease: "easeInOut", delay: 0.2 }} // Added easing function and exit duration
+                transition={{ duration: 0.5, ease: "easeInOut", delay: 0.2 }}
               >
                 <Link
                   to="/Events"
-                  style={{ color: isActive("/Events") ? "#FF8A00" : "white" }}
+                  style={{ 
+                    background: isActive("/Events") ? "var(--primary)" : (hoveredLink && hoveredLink.href.endsWith('/Events')) ? "var(--primary)" : "transparent",
+                    WebkitBackgroundClip: isActive("/Events") ? "text" : (hoveredLink && hoveredLink.href.endsWith('/Events')) ? "text" : "initial",
+                    color: isActive("/Events") ? "transparent" :(hoveredLink && hoveredLink.href.endsWith('/Events')) ? "transparent" : "inherit"
+                  }}
                   onClick={toggleMenu}
                 >
                   Events
@@ -144,11 +172,15 @@ export default function Navbar() {
                 animate="visible"
                 exit="exit"
                 variants={listVariants}
-                transition={{ duration: 0.5, ease: "easeInOut", delay: 0.3 }} // Added easing function and exit duration
+                transition={{ duration: 0.5, ease: "easeInOut", delay: 0.3 }}
               >
                 <Link
                   to="/Social"
-                  style={{ color: isActive("/Social") ? "#FF8A00" : "white" }}
+                  style={{ 
+                    background: isActive("/Social") ? "var(--primary)" : (hoveredLink && hoveredLink.href.endsWith('/Social')) ? "var(--primary)" : "transparent",
+                    WebkitBackgroundClip: isActive("/Social") ? "text" : (hoveredLink && hoveredLink.href.endsWith('/Social')) ? "text" : "initial",
+                    color: isActive("/Social") ? "transparent" :(hoveredLink && hoveredLink.href.endsWith('/Social')) ? "transparent" : "inherit"
+                  }}
                   onClick={toggleMenu}
                 >
                   Social
@@ -160,11 +192,15 @@ export default function Navbar() {
                 animate="visible"
                 exit="exit"
                 variants={listVariants}
-                transition={{ duration: 0.5, ease: "easeInOut", delay: 0.4 }} // Added easing function and exit duration
+                transition={{ duration: 0.5, ease: "easeInOut", delay: 0.4 }}
               >
                 <Link
                   to="/Team"
-                  style={{ color: isActive("/Team") ? "#FF8A00" : "white" }}
+                  style={{ 
+                    background: isActive("/Team") ? "var(--primary)" : (hoveredLink && hoveredLink.href.endsWith('/Team')) ? "var(--primary)" : "transparent",
+                    WebkitBackgroundClip: isActive("/Team") ? "text" : (hoveredLink && hoveredLink.href.endsWith('/Team')) ? "text" : "initial",
+                    color: isActive("/Team") ? "transparent" :(hoveredLink && hoveredLink.href.endsWith('/Team')) ? "transparent" : "inherit"
+                  }}
                   onClick={toggleMenu}
                 >
                   Team
@@ -178,7 +214,7 @@ export default function Navbar() {
                   animate="visible"
                   exit="exit"
                   variants={listVariants}
-                  transition={{ duration: 0.5, ease: "easeInOut", delay: 0.5 }} // Added easing function and exit duration
+                  transition={{ duration: 0.5, ease: "easeInOut", delay: 0.5 }}
                 >
                   <MdOutlineLogout size={25} /> Logout
                 </motion.button>
@@ -189,7 +225,7 @@ export default function Navbar() {
                   animate="visible"
                   exit="exit"
                   variants={listVariants}
-                  transition={{ duration: 0.5, ease: "easeInOut", delay: 0.5 }} // Added easing function and exit duration
+                  transition={{ duration: 0.5, ease: "easeInOut", delay: 0.5 }}
                   onClick={toggleMenu}
                 >
                   <button className={style.mobilesignup}>

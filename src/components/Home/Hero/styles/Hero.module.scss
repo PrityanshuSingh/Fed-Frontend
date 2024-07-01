@@ -37,6 +37,11 @@
     align-items: center;
     position: relative;
   }
+
+  span{
+    color: transparent;
+    background-clip: text;
+  }
   
   .heroone strong {
     font-size: 2.1rem;
@@ -136,6 +141,11 @@
       background-color: #1C1C1C;
       position: relative; 
       align-items: center;
+    }
+
+    .hero1{
+      margin-top: -0.5rem;
+      margin-left: 1.5rem;
     }
 
     .smallcontent {

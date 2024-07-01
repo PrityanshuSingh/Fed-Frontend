@@ -64,39 +64,55 @@ function Navbar() {
             <div className={style.logo_text}></div>
           </div>
         </Link>
-
-        <ul className={style.navItems}>
+        {/* ///Social */}
+        <ul className={style.navItems}> 
           <li className={style.navLink}>
-            <NavLink 
-              to="/" 
-              style={{ 
-                color: isActive("/") ? "#FF8A00" : hoveredLink && hoveredLink.href.endsWith('/') ? "#FF8A00" : "white"
-              }}
-            >Home</NavLink>
+          <NavLink 
+  to="/" 
+  style={{ 
+    background: isActive("/") ? "var(--primary)" : (hoveredLink && hoveredLink.href.endsWith('/')) ? "var(--primary)" : "transparent",
+    WebkitBackgroundClip: isActive("/") ? "text" : (hoveredLink && hoveredLink.href.endsWith('/')) ? "text" : "initial",
+    color: isActive("/") ? "transparent" :(hoveredLink && hoveredLink.href.endsWith('/')) ? "transparent" : "inherit"
+  }}
+>
+  Home
+</NavLink>
           </li>
           <li className={style.navLink}>
-            <NavLink 
-              to="/Events" 
-              style={{ 
-                color: isActive("/Events") ? "#FF8A00" : hoveredLink && hoveredLink.href.endsWith('/Events') ? "#FF8A00" : "white"
-              }}
-            >Events</NavLink>
+          <NavLink 
+  to="/Events" 
+  style={{ 
+    background: isActive("/Events") ? "var(--primary)" : (hoveredLink && hoveredLink.href.endsWith('/Events')) ? "var(--primary)" : "transparent",
+    WebkitBackgroundClip: isActive("/Events") ? "text" : (hoveredLink && hoveredLink.href.endsWith('/Events')) ? "text" : "initial",
+    color: isActive("/Events") ? "transparent" :(hoveredLink && hoveredLink.href.endsWith('/Events')) ? "transparent" : "inherit"
+  }}
+>
+Events
+</NavLink>
           </li>
           <li className={style.navLink}>
-            <NavLink 
-              to="/Social" 
-              style={{ 
-                color: isActive("/Social") ? "#FF8A00" : hoveredLink && hoveredLink.href.endsWith('/Social') ? "#FF8A00" : "white"
-              }}
-            >Social</NavLink>
+          <NavLink 
+  to="/Social" 
+  style={{ 
+    background: isActive("/Social") ? "var(--primary)" : (hoveredLink && hoveredLink.href.endsWith('/Social')) ? "var(--primary)" : "transparent",
+    WebkitBackgroundClip: isActive("/Social") ? "text" : (hoveredLink && hoveredLink.href.endsWith('/Social')) ? "text" : "initial",
+    color: isActive("/Social") ? "transparent" :(hoveredLink && hoveredLink.href.endsWith('/Social')) ? "transparent" : "inherit"
+  }}
+>
+Social
+</NavLink>
           </li>
           <li className={style.navLink}>
-            <NavLink 
-              to="/Team" 
-              style={{ 
-                color: isActive("/Team") ? "#FF8A00" : hoveredLink && hoveredLink.href.endsWith('/Team') ? "#FF8A00" : "white"
-              }}
-            >Team</NavLink>
+          <NavLink 
+  to="/Team" 
+  style={{ 
+    background: isActive("/Team") ? "var(--primary)" : (hoveredLink && hoveredLink.href.endsWith('/Team')) ? "var(--primary)" : "transparent",
+    WebkitBackgroundClip: isActive("/Team") ? "text" : (hoveredLink && hoveredLink.href.endsWith('/Team')) ? "text" : "initial",
+    color: isActive("/Team") ? "transparent" :(hoveredLink && hoveredLink.href.endsWith('/Team')) ? "transparent" : "inherit"
+  }}
+>
+Team
+</NavLink>
           </li>
         </ul>
 

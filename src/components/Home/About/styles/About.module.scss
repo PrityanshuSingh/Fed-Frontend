@@ -2,9 +2,7 @@
 
 @import "../../../../assets/styles/Global.scss";
 
-span{
-    color:#FF8A00;
-}
+
 
 .container{
     overflow: hidden;
@@ -27,7 +25,8 @@ span{
 .bottomLine {
     width: 12rem;
     height: 0.3125rem;
-    background: #FF8A00;
+    background: var(--primary);
+    color: transparent;
     border-radius: 5px;
     margin-bottom: 1rem;
   }

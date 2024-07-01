@@ -97,7 +97,9 @@
   font-size: 40px;
 }
 .icon:hover{
-  color: #FF8A00;
+  background: var(--primary);
+  background-clip: text;
+  color: transparent;
 }
 .link1 :hover{
   color: #FF8A00;
@@ -105,7 +107,9 @@
 }
 
 .footerleftlink:hover{
-  color: #FF8A00;
+  background: var(--primary);
+  background-clip: text;
+  color: transparent;
   transition: 0.3s ease-in-out;
 }
 

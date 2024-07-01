@@ -12,3 +12,11 @@ $text-color: white;
 //EventCardModal
 $bg-color: rgb(46, 44, 44);
 
+//text color
+:root{
+    --primary: linear-gradient(
+    260deg,
+    rgba(255, 190, 11, 0.84) -29.7%,
+    rgba(244, 43, 3, 0.84) 128.34%
+  );
+}

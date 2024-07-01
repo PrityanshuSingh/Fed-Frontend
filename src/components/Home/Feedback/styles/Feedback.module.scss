@@ -34,7 +34,8 @@
 .bottomLine {
   width: 12rem;
   height: 0.3125rem;
-  background: #FF8A00;
+  background: var(--primary);
+  color: transparent;
   border-radius: 5px;
   margin-bottom: 4rem;
 }
@@ -49,10 +50,14 @@
   font-size: 1.7rem;
 }
 .heading span{
-  color: #FF8A00;
+  background: var(--primary);
+    background-clip: text;
+    color: transparent;
 }
 .highlight {
-  color: #FF8A00;
+  background: var(--primary);
+    background-clip: text;
+    color: transparent;
 }
 
 .feedbacksContainer {
@@ -104,7 +109,9 @@
 }
 
 .feedbackAuthor {
-  color: #FF8A00;
+  background: var(--primary);
+    background-clip: text;
+    color: transparent;
   font-weight: bold;
   margin-bottom: 5px;
   white-space: normal;

@@ -20,13 +20,16 @@
 .bottomLine {
   width: 10rem;
   height: 0.3125rem;
-  background: #D87B0C;
+  background: var(--primary);
+  color: transparent;
   border-radius: 5px;
   margin-bottom: 3rem;
 }
 
 .highlight {
-  color: #FF8A00;
+  background: var(--primary);
+  background-clip: text;
+  color: transparent;
 }
 
 .formSection {
@@ -69,7 +72,8 @@ form {
 }
 
 form button {
-  background-color: #FF8A00;
+  background: var(--primary);
+  color: transparent;
   color: white;
   border: none;
   padding: 10px 20px;

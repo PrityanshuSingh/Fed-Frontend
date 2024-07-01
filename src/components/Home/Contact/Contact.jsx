@@ -1,45 +1,8 @@
-import { useEffect } from 'react';
-import { motion, useAnimation } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
 import styles from './styles/Contact.module.scss';
 import contactImg from "../../../assets/images/contact.png";
+import { AnimatedBox } from "../../../assets/animations/AnimatedBox";
 
 function ContactForm() {
-
-  const getBoxVariant = (direction) => {
-    return {
-      visible: { opacity: 1, x: 0, transition: { duration: 1.2 } },
-      hidden: { opacity: 0, x: direction === 'left'? -100 : 100 }
-    };
-  };
-
-  const AnimatedBox = ({ children, direction }) => {
-    const control = useAnimation();
-    const [ref, inView] = useInView({
-      triggerOnce: false,
-      threshold: 0.3,
-    });
-
-    useEffect(() => {
-      if (inView) {
-        control.start('visible');
-      } else {
-        control.start('hidden');
-      }
-    }, [control, inView]);
-
-    return (
-      <motion.div
-        ref={ref}
-        variants={getBoxVariant(direction)}
-        initial="hidden"
-        animate={control}
-      >
-        {children}
-      </motion.div>
-    );
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
