@@ -1,13 +1,15 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import styles from "./styles/ProfileView.module.scss";
 import AuthContext from "../../../../context/AuthContext";
 import { FiEdit } from "react-icons/fi";
-import {EditProfile} from "../../../../features";
+import { EditProfile } from "../../../../features";
+import { ComponentLoading } from "../../../../microInteraction";
 import PropTypes from "prop-types";
 
 const Profile = ({ editmodal }) => {
   const authCtx = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleOpen = () => {
     setIsOpen(true);
@@ -17,58 +19,72 @@ const Profile = ({ editmodal }) => {
     setIsOpen(false);
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000); 
+  }, []);
+
+  const userDetails = [
+    { label: "Full Name", value: authCtx.user.name },
+    { label: "Email ID", value: authCtx.user.email },
+    { label: "Roll Number", value: authCtx.user.rollNumber },
+    { label: "Year", value: authCtx.user.year },
+    { label: "School", value: authCtx.user.school },
+    { label: "College", value: authCtx.user.college },
+    { label: "Mobile No", value: authCtx.user.contactNo },
+  ];
+
+  if (authCtx.user.access !== "USER") {
+    if(authCtx.user.designation) {
+      userDetails.push({ label: "Designation", value: authCtx.user.designation });
+    }
+
+     if(authCtx.user.github) {
+    userDetails.push(
+      { label: "Github", value: authCtx.user.github },
+    );
+     }
+        if(authCtx.user.linkedin) {
+          userDetails.push(
+      { label: "LinkedIn", value: authCtx.user.linkedin }
+    );
+        }
+  }
+
   return (
     <div id={styles.profile}>
-      <div style={{ width: "85%", position: "relative" }}>
-        <div
-          style={{ position: "absolute", right: "0", top: "0", cursor: "pointer" }}
-          onClick={handleOpen}
-        >
-          <FiEdit />
-        </div>
-      </div>
       <div className={styles.proHeading}>
         <h3 className={styles.headInnerText}>
           <span>Profile</span> Details
         </h3>
+        {authCtx.user.access !== "USER" && (
+          <div className={styles.editbtn} onClick={handleOpen}>
+            <FiEdit />
+          </div>
+        )}
       </div>
       {authCtx.user && (
-        <div className={styles.details}>
-          <table className={styles.profileTable}>
-            <tbody>
-              <tr>
-                <td className={styles.dets}>Full Name</td>
-                <td className={styles.vals}>{authCtx.user.name}</td>
-              </tr>
-              <tr>
-                <td className={styles.dets}>Roll Number</td>
-                <td className={styles.vals}>{authCtx.user.rollNo}</td>
-              </tr>
-              <tr>
-                <td className={styles.dets}>Email ID</td>
-                <td className={styles.vals}>{authCtx.user.email}</td>
-              </tr>
-              <tr>
-                <td className={styles.dets}>Year</td>
-                <td className={styles.vals}>{authCtx.user.year}</td>
-              </tr>
-              <tr>
-                <td className={styles.dets}>School</td>
-                <td className={styles.vals}>{authCtx.user.school}</td>
-              </tr>
-              <tr>
-                <td className={styles.dets}>College</td>
-                <td className={styles.vals}>{authCtx.user.college}</td>
-              </tr>
-              <tr>
-                <td className={styles.dets}>Mobile No</td>
-                <td className={styles.vals}>{authCtx.user.mobileNo}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        isLoading ? (
+          <ComponentLoading />
+        ) : (
+          <div className={styles.details}>
+            <table className={styles.profileTable}>
+              <tbody>
+                {userDetails.map((detail, index) => (
+                  <tr key={index}>
+                    <td className={styles.dets}>{detail.label}</td>
+                    <td className={styles.vals}>{detail.value}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )
       )}
-      {isOpen && <EditProfile handleModalClose={handleClose} />}
+      {isOpen && authCtx.user.access !== "USER" && (
+        <EditProfile handleModalClose={handleClose} />
+      )}
     </div>
   );
 };

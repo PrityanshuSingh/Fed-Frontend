@@ -1,6 +1,4 @@
-
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
-
 
 @import "/src/assets/styles/Global.scss";
 
@@ -13,9 +11,11 @@
   font-family: "Poppins", sans-serif;
   padding-bottom: 1rem;
   z-index: 1;
+  opacity: 1;
+  overflow: hidden;
 }
 
-.sharecontainer{
+.sharecontainer {
   position: absolute;
   z-index: 2;
 }
@@ -37,7 +37,6 @@
   width: 100%;
   position: relative;
 }
-
 
 .img {
   height: 100%;
@@ -106,18 +105,16 @@
   gap: 5px;
 }
 
-.shareIcon{
+.shareIcon {
   height: 1rem;
   width: 1rem;
 }
 
-.price p{
+.price p {
   display: flex;
   align-items: center;
   color: #fff;
 }
-
-
 
 .backbtn {
   height: auto;
@@ -132,11 +129,20 @@
 
 .eventname {
   font-size: 1.3rem;
-  font-weight: 600;;
+  font-weight: 600;
   // margin-top: 0.5rem;
-  background: var(--Primary, linear-gradient(260deg, rgba(255, 190, 11, 0.84) -29.7%, rgba(244, 43, 3, 0.84) 128.34%));
+  background: var(
+    --Primary,
+    linear-gradient(
+      260deg,
+      rgba(255, 190, 11, 0.84) -29.7%,
+      rgba(244, 43, 3, 0.84) 128.34%
+    )
+  );
   color: transparent;
   background-clip: text;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 .eventname p {
@@ -146,49 +152,60 @@
   margin-top: 0.1rem;
 }
 
-.registerbtn  {
+.registerbtn {
   border-radius: 0.35788rem;
-  background: var(--Primary, linear-gradient(260deg, rgba(255, 190, 11, 0.84) -29.7%, rgba(244, 43, 3, 0.84) 128.34%));
+  background: var(
+    --Primary,
+    linear-gradient(
+      260deg,
+      rgba(255, 190, 11, 0.84) -29.7%,
+      rgba(244, 43, 3, 0.84) 128.34%
+    )
+  );
   display: inline-flex;
-  padding: 0.6rem .8rem;
+  padding: 0.6rem 0.8rem;
   justify-content: center;
   align-items: center;
+  margin-top: 1rem;
   gap: 0.3rem;
   // width: 10rem;
- cursor:progress;
+  cursor: progress;
   outline: none;
   border: none;
   font-size: 0.9rem;
   color: #fff;
 }
 
-
-
 .backtxt {
-  
-    width: 90%;
-    margin-inline: auto;
-    color: #fff;
-    font-family: "Poppins", sans-serif;
-    font-size: .8rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    margin-top: 0.1rem;
-    margin-bottom: 0;
+  width: 90%;
+  margin-inline: auto;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.8rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 0.1rem;
+  margin-bottom: 0;
 }
 
 .EventDesc {
-
   width: 90%;
 
   overflow: hidden;
-  text-overflow:ellipsis;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.seeMore{
-  background: var(--Primary, linear-gradient(260deg, rgba(255, 190, 11, 0.84) -29.7%, rgba(244, 43, 3, 0.84) 128.34%));
+.seeMore {
+  background: var(
+    --Primary,
+    linear-gradient(
+      260deg,
+      rgba(255, 190, 11, 0.84) -29.7%,
+      rgba(244, 43, 3, 0.84) 128.34%
+    )
+  );
   color: transparent;
   background-clip: text;
   width: auto;
@@ -198,15 +215,26 @@ a {
   text-decoration: none;
 }
 
+.hovered {
+  width: 94%;
+  margin: 0 auto;
+  transition: 0.5s ease;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.hovered button {
+  width: 44%;
+}
 
 @media (max-width: 600px) {
-.backbtn{
-  margin-top: .2rem;
+  .backbtn {
+    margin-top: 0.2rem;
+  }
 }
 
-}
-
-@media (max-width:400px){
+@media (max-width: 400px) {
   .card {
     width: 93%;
     margin-left: 3%;
@@ -221,13 +249,20 @@ a {
 
   .eventname {
     font-size: 1.3rem;
-    font-weight: 600;;
+    font-weight: 600;
     // margin-top: 0.5rem;
-    background: var(--Primary, linear-gradient(260deg, rgba(255, 190, 11, 0.84) -29.7%, rgba(244, 43, 3, 0.84) 128.34%));
+    background: var(
+      --Primary,
+      linear-gradient(
+        260deg,
+        rgba(255, 190, 11, 0.84) -29.7%,
+        rgba(244, 43, 3, 0.84) 128.34%
+      )
+    );
     color: transparent;
     background-clip: text;
   }
-  
+
   .eventname p {
     font-size: 0.7rem;
     display: flex;

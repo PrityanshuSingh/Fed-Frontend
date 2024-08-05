@@ -1,5 +1,6 @@
 .mainPreview {
   display: flex;
+
   flex-direction: column;
   top: 0;
   left: 0;
@@ -9,25 +10,35 @@
   background: rgba(7, 7, 7, 0.33);
   z-index: 50;
   backdrop-filter: blur(2px);
+  overflow: hidden;
 }
+
+
 
 .previewContainer {
   display: flex;
   flex-direction: column;
   align-items: start;
-  background: #2e2e2e;
-  border-radius: 10px;
-  width: 70%;
+  background: linear-gradient(
+    90deg,
+    rgba(32, 32, 32, 0.95) -11.52%,
+    rgba(37, 37, 37, 0.95) 106.29%
+  );
+  border-radius: 1.26863rem;
+  backdrop-filter: blur(4px);
+  border: 1.2px solid rgba(214, 214, 214, 0.81);
+  width: 55%;
   padding: 1.6em;
-  height: 60%;
+  height: 90%;
   margin: auto;
   z-index: 100;
+  overflow: hidden;
   overflow-y: scroll;
-  position: relative;
 }
 
 .previewContainer::-webkit-scrollbar {
   width: 6px;
+  // overflow: hidden;
 }
 .previewContainer::-webkit-scrollbar-thumb {
   background: #888;
@@ -38,17 +49,26 @@
 }
 
 .closeBtn{
- position: fixed;
-  top: 5.5rem;
-  right: 12.5rem;
+  position: absolute;
+  width: 95%;
+  display: flex;
+  justify-content: flex-end;
   color: #fff;
   cursor: pointer;
   z-index: 5;
+  
+}
+
+.no-scroll {
+  overflow: hidden;
 }
 
 .formFieldContainer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
+  // justify-content: space-evenly;
+  column-gap: 3rem;
   width: 100%;
   padding: 1em;
   border-radius: 8px;
@@ -63,4 +83,16 @@
 .formFieldContainer:active {
   border: 0.5px solid #ff88008c;
   transition: 0.5s ease-in-out;
+}
+
+@media (max-width: 480px){
+    .previewContainer{
+      height: 65%;
+      width: 90%;
+    }
+
+    .closeBtn{
+      width: 80%;
+    }
+
 }

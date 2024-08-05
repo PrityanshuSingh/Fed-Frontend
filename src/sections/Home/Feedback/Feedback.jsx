@@ -9,7 +9,8 @@ const Feedback = () => {
   const FeedbackCard = ({ quote }) => {
     return (
       <div className={styles.feedbackCard}>
-        <p className={styles.feedbackText}>{quote.quote}</p>
+        <div className={styles.FeedbackMsg}><p className={styles.feedbackText}>{quote.quote}</p></div>
+        
         <div>
         <p className={styles.feedbackAuthor}>{quote.title}</p>
         <p className={styles.feedbackEv}>{quote.post}</p>
@@ -46,7 +47,7 @@ const Feedback = () => {
       <div className={styles.feedbacksContainer}>
         <div className={styles.feedbacks} ref={feedbacksRef}>
           
-          {feedbackData.concat(feedbackData).map((quote, index) => ( // Duplicate the feedback data array
+          {feedbackData.concat(feedbackData).map((quote, index) => ( 
             <FeedbackCard key={index} quote={quote} />
           ))}
           

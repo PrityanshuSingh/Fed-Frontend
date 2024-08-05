@@ -40,6 +40,7 @@
 
 .box{
     // height: 14rem;
+   height : 35vh ;
     width: 65%;
     padding: 2rem;
     background: transparent;
@@ -48,10 +49,9 @@
     border-radius: 20px;
 }
 
-.whatfed{    
-    height: 15rem;
-    padding: 1.5rem 2rem 1.5rem 2rem;
-}
+// .whatfed{    
+//     padding: 1.5rem 2rem 1.5rem 2rem;
+// }
 
 .howfed{
     text-align: right;
@@ -64,7 +64,7 @@
 
 
 .boxinnertext {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
 }
 
 .boxflex{
@@ -79,11 +79,11 @@
 }
 
 .box2{
-    padding-top: 1rem;
+    padding-top: 0.1rem;
 }
 
 .box3{
-    padding-top: 1rem;
+    padding-top: 0.1rem;
     // padding-bottom: -9rem;
 }
 
@@ -216,7 +216,7 @@
         font-size: 1.5rem;
         height: 17rem;
         width: 45%;
-        text-align: left;
+        text-align: center;
         padding: 1rem;
         border-radius: 30px;
     }
@@ -240,6 +240,7 @@
         position: relative;
         left: 0px;
         top: 0px;
+        z-index: 1;
     }
     
     .howfed{
@@ -256,6 +257,7 @@
         left: 0px;
         bottom: 150px;
         height: 350px;
+        z-index: 1;
     }
     
     .whatfed{
@@ -273,6 +275,7 @@
         right: 0px;
         bottom: 250px;
         height: 353px;
+        z-index: 1;
     }
 
     .container{
@@ -289,7 +292,7 @@
         font-size: 1.45rem;
         height: 17rem;
         width: 45%;
-        text-align: left;
+        text-align: center;
         padding: 1rem;
         border-radius: 30px;
     }
@@ -313,6 +316,7 @@
         position: relative;
         left: 100px;
         top: 0px;
+        z-index: 1;
     }
     
     .howfed{
@@ -329,6 +333,7 @@
         left: 0px;
         bottom: 150px;
         height: 350px;
+        z-index: 1;
     }
     
     .whatfed{
@@ -346,6 +351,7 @@
         right: 0px;
         bottom: 250px;
         height: 353px;
+        z-index: 1;
     }
 
     .container{
@@ -379,7 +385,7 @@
         font-size: 1.15rem;
         height: 18rem;
         width: 80%;
-        text-align: left;
+        text-align: center;
         padding: 1rem;
         border-radius: 40px;
     }
@@ -409,6 +415,7 @@
         order: 1;
         position: relative;
         top: 0px;
+        z-index: 1;
         height: 397px;
     }
     
@@ -425,6 +432,7 @@
         position: relative;
         left: 0px;
         bottom: 150px;
+        z-index: 1;
         height: 300px;
     }
     
@@ -444,6 +452,7 @@
         bottom: 250px;
         height: 150px;
         padding-top: -3rem;
+        z-index: 1;
     }
 
     
@@ -460,7 +469,7 @@
         font-size: 1.15rem;
         // height: 18rem;
         width: 80%;
-        text-align: left;
+        text-align: center;
         padding: 1rem;
         border-radius: 40px;
     }
@@ -496,6 +505,7 @@
         top: 0px;
         height: 347px;
         margin-right: 9.9rem;
+        z-index: 1;
     }
     
     .howfed{
@@ -511,6 +521,7 @@
         left: 0px;
         bottom: 150px;
         height: 250px;
+        z-index: 1;
     }
     
     .whatfed{
@@ -526,6 +537,10 @@
     .boxinnertext p{
         font-size: 1.18rem;
     }
+
+    .boxhead{
+        margin-top: 19px;
+    }
     
     .whatfedimg{
         order: 1;
@@ -533,6 +548,7 @@
         right: 0px;
         bottom: 250px;
         height: 253px;
+        z-index: 1;
     }
 
     .container{
@@ -548,7 +564,7 @@
         font-size: 1.1rem;
         height: 18rem;
         width: 80%;
-        text-align: left;
+        text-align: center;
         padding: 1rem;
         border-radius: 40px;
     }
@@ -577,6 +593,7 @@
         position: relative;
         top: 0px;
         height: 347px;
+        z-index: 1;
     }
     
     .howfed{
@@ -592,6 +609,7 @@
         left: 0px;
         bottom: 150px;
         height: 250px;
+        z-index: 1;
     }
     
     .whatfed{
@@ -609,6 +627,7 @@
         right: 0px;
         bottom: 250px;
         height: 253px;
+        z-index: 1;
     }
 
     .boxinnertext p{

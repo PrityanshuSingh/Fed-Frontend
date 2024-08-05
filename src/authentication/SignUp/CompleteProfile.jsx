@@ -1,44 +1,49 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Link, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Input from "../../components/Core/Input";
 import Button from "../../components/Core/Button";
-// import bcrypt from "bcryptjs-react";
-
 import Load from "../../microInteraction/Load/Load";
-import axios from "axios";
-import CPCss from "./style/CompleteProfile.module.scss";
+import styles from "./style/CompleteProfile.module.scss";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import AuthContext from "../../context/AuthContext";
+import { Alert, MicroLoading } from "../../microInteraction";
+import { api } from "../../services";
 
-function CompleteProfile(props) {
+function CompleteProfile() {
   const [loadingEffect, setLoad] = useState(false);
-  // const [DropShow, hideDrop] = useState(false);
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const [alert, setAlert] = useState(null);
   const [year, setYear] = useState("");
   const [showUser, setUser] = useState({
     email: "",
-    Password: "",
     name: "",
-    RollNumber: "",
-    School: "",
-    College: "",
-    MobileNo: "",
+    rollNumber: "",
+    school: "",
+    college: "",
+    contactNo: "",
     img: "",
     year: "",
   });
-
-  // var setError = props.setError;
+  const [errors, setErrors] = useState({});
 
   const authCtx = useContext(AuthContext);
+  const location = useLocation();
 
-  const navigate = useNavigate();
+  const userData = location.state?.data || {};
+  const { name = "", email = "", picture: img = "" } = userData;
 
-  const DataInp = (name, value) => {
-    setUser({ ...showUser, [name]: value });
-  };
+  const validate = () => {
+    const newErrors = {};
+    if (!showUser.rollNumber) newErrors.rollNumber = "Roll Number is required";
+    if (!showUser.school) newErrors.school = "School is required";
+    if (!showUser.college) newErrors.college = "college is required";
+    if (!showUser.contactNo || !/^\d{10}$/.test(showUser.contactNo)) newErrors.contactNo = "Enter a valid 10-digit Mobile Number";
+    if (!year) newErrors.year = "Year is required";
 
-  const handleChange = (event) => {
-    setYear(event.target.value);
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const options = [
@@ -47,219 +52,216 @@ function CompleteProfile(props) {
     { value: "3rd", text: "3rd year" },
     { value: "4th", text: "4th year" },
     { value: "5th", text: "5th year" },
+    { value: "Passout", text: "Passout" },
   ];
+
+  useEffect(() => {
+    setAlert({
+      type: "info",
+      message: "Kindly complete your profile for registration",
+      position: "bottom-right",
+      duration: 3000,
+    });
+  }, []);
+
+  useEffect(() => {
+    if (alert) {
+      const { type, message, position, duration } = alert;
+      Alert({ type, message, position, duration });
+    }
+  }, [alert]);
 
   const handleCreateProfile = async (e) => {
     e.preventDefault();
-    console.log(showUser);
+    if (!validate()) return;
 
-    const { RollNumber, School, College, MobileNo, tandC } = showUser;
+    setIsLoading(true);
 
-    // if (
-    //   props.data.name !== "" &&
-    //   props.data.id !== "" &&
-    //   props.data.email !== "" &&
-    //   props.data.picture !== "" &&
-    //   RollNumber !== "" &&
-    //   School !== "" &&
-    //   College !== "" &&
-    //   MobileNo.length === 10 &&
-    //   tandC
-    // ) {
-    //   setLoad(true);
-    alert("profile created");
-
-    const password = props.data.id;
-    console.log(props.data.email);
+    const { rollNumber, school, college, contactNo } = showUser;
 
     const userObject = {
-      name: props.data.name,
-      email: props.data.email,
-      password: password,
-      img: props.data.picture,
-      RollNumber,
-      School,
-      College,
-      MobileNo,
+      name,
+      email,
+      img,
+      rollNumber,
+      school,
+      college,
+      contactNo,
       year,
     };
-    console.log(userObject);
 
-    // try {
-    //   const response = await axios.post(`/auth/googleregister`, userObject);
+    try {
+      // API call
+      const response = await api.post("/api/auth/register", userObject);
+      if (response.status === 200 || response.status === 201) {
 
-    //   if (response.data.status === true) {
-    //     authCtx.login(
-    //       response.data.user.name,
-    //       response.data.user.email,
-    //       response.data.user.img,
-    //       response.data.user.RollNumber,
-    //       response.data.user.School,
-    //       response.data.user.College,
-    //       response.data.user.MobileNo,
-    //       response.data.user.selected,
-    //       response.data.user.regForm,
-    //       Number(response.data.user.access),
-    //       response.data.token,
-    //       10800000
-    //     );
+        setAlert({
+          type: "success",
+          message: "Profile created successfully",
+          position: "bottom-right",
+          duration: 3000,
+        });
 
-    //     props.set(false);
+        setTimeout(() => {
+          authCtx.login(
+            userObject.name,
+            userObject.email,
+            userObject.img,
+            userObject.rollNumber,
+            userObject.school,
+            userObject.college,
+            userObject.contactNo,
+            userObject.year,
+            userObject.github,
+            userObject.linkedin,
+            userObject.designation,
+            userObject.regForm,
+            "USER",
+            "someToken",
+            7200000
+          );
+          navigate("/");
+        }, 3000);
 
-    //     if (authCtx.target == "" || (authCtx.target == null) == "") {
-    //       // navigate("/MyProfile");
-    //       window.history.back();
-    //     } else {
-    //       navigate(`/${authCtx.target}`);
-    //       authCtx.settarget(null);
-    //     }
-
-    //     return;
-    //   } else {
-    //     setLoad(false);
-    //   }
-    // } catch (error) {
-    //   setLoad(false);
-
-    //   if (error.response.data.code === 1) {
-    //     console.log("error code 1");
-    //   }
-    //   if (error.response.data.code === 2) {
-    //     console.log("error code 2");
-    //   }
-    // }
-    // } else {
-    //   setLoad(false);
-
-    // if (MobileNo.length !== 10) {
-    //   console.log("enter correct mobile no");
-    // } else {
-    //   console.log("fill all details");
-    // }
-
-    // }
+        
+      } else {
+        setAlert({
+          type: "error",
+          message: response.data.message || "An error occurred",
+          position: "bottom-right",
+          duration: 3000,
+        });
+      }
+    } catch (error) {
+      console.error("Error during profile creation:", error);
+      setAlert({
+        type: "error",
+        message: "An error occurred while creating your profile. Please try again.",
+        position: "bottom-right",
+        duration: 3000,
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
-    <div
-      className={CPCss.mDiv}
-      id={
-        Object.keys(props.data).length > 0 ? CPCss.showCreate : CPCss.hideCreate
-      }
-    >
-      <div className={CPCss.mDivCon}>
-        <div className={CPCss.ArrowBackIcon} onClick={() => props.set(false)}>
+    <div className={styles.mDiv}>
+      <div className={styles.mDivCon}>
+        <div className={styles.ArrowBackIcon} onClick={() => navigate(-1)}>
           <ArrowBackIcon />
         </div>
-        <div className={CPCss.BackGround}>
+        <div className={styles.circle}></div>
+        <div className={styles.circle1}></div>
+        <div className={styles.BackGround}>
           <div>
-            <p className={CPCss.CreateProfile}>Create Profile</p>
-            <p className={CPCss.Please}>Please enter Your Details</p>
+            <p
+              className={styles.CreateProfile}
+              style={{
+                background: "var(--primary)",
+                padding: "5px 0px 5px 0px",
+                WebkitBackgroundClip: "text",
+                color: "transparent",
+                alignItems: "center",
+              }}
+            >
+              Create Profile
+            </p>
+            <p className={styles.Please}>Please enter Your Details</p>
           </div>
 
-          <form className={CPCss.FormTag}>
-            {/* college */}
+          <form className={styles.FormTag} onSubmit={handleCreateProfile}>
+            <Input
+              type="text"
+              placeholder="Enter Roll Number"
+              label="Roll Number"
+              name="rollNumber"
+              onChange={(e) => setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }))}
+              required
+              style={{ width: "100%" }}
+              error={errors.rollNumber}
+            />
 
             <Input
               type="select"
-              placeholder="College Name"
+              placeholder="Select Year"
+              label="Year"
+              name="year"
+              options={options.map(option => ({ label: option.text, value: option.value }))}
+              value={year}
+              onChange={(value) => setYear(value)}
+              required
+              style={{ width: "100%" }}
+              error={errors.year}
+            />
+
+            <Input
+              type="text"
+              placeholder="Enter School"
+              label="School"
+              name="school"
+              onChange={(e) => setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }))}
+              required
+              style={{ width: "100%" }}
+              error={errors.school}
+            />
+
+            <Input
+              type="select"
+              placeholder="Select college"
               label="College"
-              name="College"
+              name="college"
               options={[
                 {
                   label: "Kalinga Institute of Industrial Technology",
                   value: "Kalinga Institute of Industrial Technology",
                 },
               ]}
-              value={showUser.College}
-              onChange={(value) => DataInp("College", value)}
+              value={showUser.college}
+              onChange={(value) => setUser((prev) => ({ ...prev, college: value }))}
               required
               style={{ width: "96%" }}
+              error={errors.college}
             />
 
-            {/* Roll number */}
-
             <Input
-              type="text"
-              placeholder="Roll Number"
-              label="Roll Number"
-              name="RollNumber"
-              onChange={(e) => DataInp(e.target.name, e.target.value)}
-              required
-              style={{ width: "100%" }}
-            />
-
-            {/* school */}
-            <Input
-              type="text"
-              placeholder="School"
-              label="School"
-              name="School"
-              onChange={(e) => DataInp(e.target.name, e.target.value)}
-              required
-              style={{ width: "100%" }}
-            />
-
-            {/* Phone Number */}
-
-            <Input
-              type="text"
-              placeholder="1234567890"
+              type="number"
+              placeholder="Enter Mobile Number"
               label="Mobile"
-              name="MobileNo"
-              onChange={(e) => DataInp(e.target.name, e.target.value)}
+              name="contactNo"
+              onChange={(e) => setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }))}
               required
               style={{ width: "100%" }}
+              error={errors.contactNo}
             />
 
-            <div>
-              <label style={{ marginLeft: "2%" }} htmlFor="year">
-                year
-              </label>
-              <select
-                value={year}
-                name="year"
-                onChange={handleChange}
-                className={CPCss.year}
-              >
-                <option hidden>Year</option>
-                {options.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.text}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div
-              style={{
-                marginLeft: "8px",
-              }}
-            >
+            <div style={{ marginLeft: "8px" }}>
               <Button
                 style={{
                   width: "102%",
-                  backgroundColor: "#ff6b00",
+                  background: "var(--primary)",
                   color: "#fff",
                   height: "40px",
                   marginTop: "20px",
                   fontSize: "1rem",
                   cursor: "pointer",
-                  border: "1px solid #fff",
                 }}
                 type="submit"
-                onClick={handleCreateProfile}
               >
-                {loadingEffect ? <Load /> : "Create Profile"}
+                {isLoading ? <MicroLoading /> : "Create Profile"}
               </Button>
             </div>
           </form>
         </div>
       </div>
+      <Alert />
     </div>
   );
 }
 
-CompleteProfile.propTypes = {};
+CompleteProfile.propTypes = {
+  data: PropTypes.object,
+  set: PropTypes.func,
+};
 
 export default CompleteProfile;

@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { api } from "../../services";
 import styles from "./styles/Alumni.module.scss";
 import { TeamCard } from "../../components";
-import useWindowWidth from "../../hooks/useWindowWidth"; // Import useWindowWidth hook
+import useWindowWidth from "../../utils/hooks/useWindowWidth"; // Import useWindowWidth hook
 import MemberData from "../../data/Team.json"; // Local fallback data
+import { ComponentLoading } from "../../microInteraction";
 
 const Alumni = () => {
   useEffect(() => {
@@ -11,20 +12,39 @@ const Alumni = () => {
   }, []);
 
   const [alumni, setAlumni] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [Error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchAlumni = async () => {
       try {
-        // const response = await axios.get('/api/user/fetchTeam');
-        // setTeamMembers(response.data);
-        const testAlumni = MemberData;
-        const filteredAlumni = testAlumni.filter(member => member.access === 'ALUMNI');
-        setAlumni(filteredAlumni);
-        setLoading(false);
+        const response = await api.get("/api/user/fetchAlumni");
+
+        if (response.status === 200) {
+          setAlumni(response.data.data);
+        } else {
+          console.error("Error fetching our Alumnis:", response.data.message);
+          // using local JSON data
+          const testMembers = MemberData;
+          const fileteredAlumni = testMembers.filter(
+            (member) => member.access === "ALUMNI"
+          );
+          setAlumni(fileteredAlumni);
+        }
       } catch (error) {
-        console.error('Error fetching alumni members:', error);
-        setLoading(false);
+        setError({
+          message:
+            "Sorry for the inconvenience, we are having issues fetching our Alumni",
+        });
+        console.error("Error fetching our Alumnis:", error);
+        // using local JSON data
+        // const testMembers = MemberData;
+        // const fileteredAlumni = testMembers.filter(
+        //   (member) => member.access === "ALUMNI"
+        // );
+        // setAlumni(fileteredAlumni);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -35,8 +55,12 @@ const Alumni = () => {
     const windowWidth = useWindowWidth();
     const membersPerRow = windowWidth < 500 ? 2 : 4;
     const remainderMembersCount = alumni.length % membersPerRow;
-    const lastRowMembers = remainderMembersCount > 0 ? alumni.slice(-remainderMembersCount) : [];
-    const otherMembers = remainderMembersCount > 0 ? alumni.slice(0, -remainderMembersCount) : alumni;
+    const lastRowMembers =
+      remainderMembersCount > 0 ? alumni.slice(-remainderMembersCount) : [];
+    const otherMembers =
+      remainderMembersCount > 0
+        ? alumni.slice(0, -remainderMembersCount)
+        : alumni;
 
     return (
       <div className={styles.alumniSection}>
@@ -76,11 +100,27 @@ const Alumni = () => {
   return (
     <div className={styles.Alumni}>
       <h2>
-        Meet Our <span style={{ background: "var(--primary)", WebkitBackgroundClip: "text", color: "transparent" }}>Alumni</span>
+        Meet Our{" "}
+        <span
+          style={{
+            background: "var(--primary)",
+            WebkitBackgroundClip: "text",
+            color: "transparent",
+          }}
+        >
+          Alumni
+        </span>
       </h2>
       {/* <div className={styles.circle}></div> */}
-      {!loading && <AlumniSection alumni={alumni} />}
       {/* <div className={styles.circle2}></div> */}
+      {isLoading ? (
+        <ComponentLoading />
+      ) : (
+        <>
+          {Error && <div className={styles.error}>{Error.message}</div>}
+          <AlumniSection alumni={alumni} />
+        </>
+      )}
     </div>
   );
 };

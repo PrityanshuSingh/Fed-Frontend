@@ -1,7 +1,7 @@
 // load.module.scss
 @import "../../../assets/styles/Global.scss";
 
-.pageload {
+.pageLoad {
   position: fixed;
   top: 60%;
   left: 50%;
@@ -18,7 +18,7 @@
 
 
 @media (max-width: 768px) {
-    .pageload {
+    .pageLoad {
         top: 52%;
         left: 50%;
         transform: translate(-50%, -50%);

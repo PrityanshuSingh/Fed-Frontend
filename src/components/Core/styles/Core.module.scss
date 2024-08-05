@@ -63,7 +63,6 @@
   outline: none;
   border: none;
   padding: 10px;
-  // width: auto;
   font-size: 12px;
   margin: 6px;
   margin-bottom: 10px;
@@ -94,6 +93,8 @@
 .inputDate {
   padding: 6px !important;
   width: auto !important;
+  height: 40px !important;
+  position: relative;
 }
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {

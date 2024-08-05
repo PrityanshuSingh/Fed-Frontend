@@ -3,6 +3,8 @@ import { MdOutlineClose } from "react-icons/md";
 import styles from "./styles/Form.module.scss";
 import Input from "../Core/Input";
 import Button from "../Core/Button";
+import PropTypes from "prop-types";
+import { Text } from "../Core";
 
 const PopField = ({
   field,
@@ -39,61 +41,81 @@ const PopField = ({
     }, 100);
   };
 
+  const operators = [
+    { label: "match", value: "===" },
+    { label: "match not", value: "!==" },
+    // { label: "contains", value: "includes" },
+    // { label: "does not contain", value: "!includes" },
+    { label: "less than", value: "<" },
+    { label: "greater than", value: ">" },
+    { label: "less than or equal to", value: "<=" },
+    { label: "greater than or equal to", value: ">=" },
+  ];
+
+  const isFieldsFilled = () => {
+    return field.validations.every((valid) => {
+      return valid.type && valid.value && valid.operator;
+    });
+  };
+
   return (
     <div className={styles.popField} ref={wrapperRef}>
+      <Text style={{ marginBottom: "12px" }} variant={"secondary"}>
+        Field Validations
+      </Text>
       {field?.validations?.map((valid, i) => (
         <div key={i} ref={scrollRef} className={styles.popFieldInpt}>
           <Input
-            defaultValue={valid.condition}
-            name="Condition"
-            placeholder="Enter Condition"
-            label="Enter Condition"
+            defaultValue={valid.type}
+            name="Validation_Type"
+            placeholder="Choose Type"
+            label="On Type"
+            type={"select"}
+            value={valid.type}
+            options={[
+              { label: "Length", value: "length" },
+              // { label: "Pattern", value: "pattern" },
+              // { label: "Range", value: "range" },
+            ]}
+            className={styles.fieldInput}
+            containerClassName={styles.popFieldInptContainer}
+            onChange={(value) =>
+              onFieldValidationChange(value, "type", field, valid._id)
+            }
+          />
+          <Input
+            defaultValue={valid.value}
+            name="Validation_Value"
+            placeholder="Make Sure"
+            label="Make Sure"
+            type={valid.type === "length" ? "number" : "text"}
             className={styles.fieldInput}
             containerClassName={styles.popFieldInptContainer}
             onChange={(e) =>
-              onFieldValidationChange(
-                e.target.value,
-                "condition",
-                field,
-                valid._id
-              )
+              onFieldValidationChange(e.target.value, "value", field, valid._id)
             }
           />
-
           <Input
-            value={valid.target}
-            placeholder="Choose Target"
-            label="Target Section"
-            name="Target_Section"
-            type="select"
+            name="Validation_Operator"
+            placeholder="Match Operator"
+            label="Match Operator"
+            type={"select"}
+            options={operators}
+            value={valid.operator}
             className={styles.fieldInput}
             containerClassName={styles.popFieldInptContainer}
-            options={[
-              ...sections.map((section) => {
-                return {
-                  label: `Section_${section._id}`,
-                  value: section._id,
-                };
-              }),
-              {
-                label: "Submit",
-                value: "Submit",
-              },
-            ]}
             onChange={(value) =>
-              onFieldValidationChange(value, "target", field, valid._id)
+              onFieldValidationChange(value, "operator", field, valid._id)
             }
           />
-          {field.type === "checkbox" && field?.validations.length > 1 && (
+          {field?.validations.length > 1 && (
             <MdOutlineClose
-              size={22}
+              size={24}
               onClick={() => {
                 onRemoveValidation(field, valid._id);
               }}
+              color="#FF8A00"
               style={{
-                backgroundColor: "var(--primary)", 
-            WebkitBackgroundClip: "text", 
-            color: "transparent",
                 cursor: "pointer",
                 marginTop: "12px",
                 zIndex: 10,
@@ -108,10 +130,9 @@ const PopField = ({
           alignItems: "center",
         }}
       >
-        {field.type === "checkbox" && (
-          <Button onClick={addCondition}>Add Condition</Button>
-        )}
+        <Button onClick={addCondition}>Add Validations</Button>
         <p
+          title={`${field.name}_ID_${field._id}`}
           style={{
             color: "#fff",
             opacity: "0.4",
@@ -121,7 +142,8 @@ const PopField = ({
             marginLeft: sections.length > 1 ? 0 : "8px",
           }}
         >
-          Field_{field._id} ({field.validations.length} conditions)
+          {field.name || "Field"}_{field._id} has ({field.validations.length}{" "}
+          validations)
         </p>
         <Button onClick={handleClose} variant="secondary">
           Close
@@ -129,6 +151,32 @@ const PopField = ({
       </div>
     </div>
   );
+};
+
+PopField.propTypes = {
+  field: PropTypes.shape({
+    _id: PropTypes.number.isRequired,
+    validations: PropTypes.arrayOf(
+      PropTypes.shape({
+        _id: PropTypes.number.isRequired,
+        condition: PropTypes.string.isRequired,
+        target: PropTypes.string.isRequired,
+      })
+    ).isRequired,
+    type: PropTypes.oneOf([
+      "text",
+      "number",
+      "radio",
+      "checkbox",
+      "select",
+      "date",
+    ]).isRequired,
+  }).isRequired,
+  sections: PropTypes.array.isRequired,
+  handleClose: PropTypes.func.isRequired,
+  onFieldValidationChange: PropTypes.func.isRequired,
+  onAddValidation: PropTypes.func.isRequired,
+  onRemoveValidation: PropTypes.func.isRequired,
 };
 
 export default PopField;

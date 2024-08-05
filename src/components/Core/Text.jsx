@@ -1,4 +1,4 @@
-import React from "react";
+import PropTypes from "prop-types";
 import styles from "./styles/Core.module.scss";
 
 const Text = (props) => {
@@ -59,5 +59,13 @@ const Text = (props) => {
   );
 };
 
-export default Text;
+Text.propTypes = {
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+  variant: PropTypes.oneOf(["primary", "secondary"]),
+  type: PropTypes.oneOf(["h1", "h2", "h3", "h4", "h5", "h6", "p", "body2"]),
+  style: PropTypes.object,
+  onClick: PropTypes.func,
+};
 
+export default Text;

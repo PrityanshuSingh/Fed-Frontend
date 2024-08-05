@@ -1,10 +1,11 @@
-h2 {
+.Alumni h2 {
   text-align: center;
   font-size: 50px;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-h2 span {
+.Alumni h2 span {
   color: #FF8A00;
 }
 
@@ -22,10 +23,18 @@ h2 span {
 }
 
 .alumniSection span {
-  margin-left: 25px;
   font-weight: 800;
 }
 
+.error{
+  padding: 30px 70px;
+  z-index: 1;
+  text-align: center;
+  margin-top: 4rem;
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
 
 .alumniGrid {
   display: grid;
@@ -93,7 +102,7 @@ h2 span {
   // }
 
 
-  h2 {
+  .Alumni h2 {
     font-size: 2.5rem;
   }
 
@@ -107,6 +116,15 @@ h2 span {
 
   .para p{
     font-size: 13px;
+  }
+  .error{
+    padding: 30px 70px;
+    z-index: 1;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 10px;
   }
 }
 
@@ -127,7 +145,7 @@ h2 span {
     margin-top: 1.7rem;
   }
 
-  h2 {
+  .Alumni h2 {
     font-size: 2rem;
   }
   // .circle {
@@ -136,6 +154,15 @@ h2 span {
   //   overflow: hidden;
   // }
 
+  .error{
+    padding: 30px 70px;
+    z-index: 1;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
   .alumniSection span {
     margin-left: 5px;
   }

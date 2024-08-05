@@ -11,48 +11,67 @@
     flex-direction: row;
     background-color: #1C1C1C;
     position: relative; 
-    margin-top:1rem;   
+    margin-top: 2rem;   
     padding-bottom: 4.5vw;
     padding-left: 0px;
     z-index: 0;
   }
   
-  .hero1 {
+  .heroTextContainer {
     height: 100%;
     width: 100%;    
-    padding: 3vw;
     z-index: 1;
+    padding-left: 2.5rem;
+    margin-top: 3rem;
+
   }
   
-  .heroone {
-    padding-top: 2.5rem;
-    padding-bottom: 1vw;
-  }
-  
-  
-  .hero2 {
-    width: 100%; 
+  .heroCarousel {
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
   }
 
-  span{
+  .main span{
     color: transparent;
     background-clip: text;
   }
   
-  .heroone strong {
-    font-size: 2.1rem;
+  .largeContent p {
+    font-weight: 700;
+    font-size: 2.45rem;
     color: #FFFFFF;
-    letter-spacing: 0.1vw;
+  }
+
+  .largeContent h3{
+    animation: fadeIn 3s ease-in-out;
+    white-space: nowrap; /* Prevent wrapping */
+  }
+
+  .dynamicText {
+    height: 65px; /* Set to a fixed height */
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .typing {
+    display: inline-block;
+    white-space: nowrap;
+    border-right: 4px solid;
+    animation: blink 0.75s step-end infinite;
+    max-width: 100%;
+    overflow: hidden;
   }
   
-  .smallcontent strong {
-    font-size: 1.2rem;
+  .smallContent p {
+    font-size: 1.1rem;
     color: #FFFFFF;
     letter-spacing: 0.1vw;
+    font-weight: 500;
   }
   
   .circle {
@@ -75,24 +94,24 @@
     align-items: center;
   }
   
-  .smallcontent {
+  .smallContent {
     display: flex;
     align-items: center;
   }
   
   
-  .herotwo {
+  .smallContainer {
     padding-top: 2vw;
     padding-bottom: 3vw;
   }
   
 
 @media (max-width: 1025px) {
-.heroone strong{
+.largeContent p{
     font-size: 1.3rem;
 }
 
-.herotwo strong{
+.smallContainer strong{
     font-size: 0.8rem;
 }
 
@@ -113,9 +132,10 @@
       padding-top: 1rem;
     }
   
-    .hero1 {
+    .heroTextContainer {
       z-index: 1; 
       padding-left: 25px;
+      padding-right: 30px;
     }
   }
 
@@ -123,17 +143,25 @@
   
   @media screen and (max-width: 480px) {
 
-    .heroone strong{
-      font-size: 1.3rem;
+    .largeContent p{
+      font-size: 1.6rem;
       text-align: center;
+      
     }
-  .hero1{
-      margin-left: 0.5rem;
-      margin-top: 2rem;
-  }
-  .smallcontent strong{
-    font-size: 1rem;
-  }
+
+    .dynamicText {
+      height: 45px; /* Set to a fixed height */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+
+    }
+
+    .smallContent p{
+      font-size: 1rem;
+    }
     .hero {
       width: 100%;
       display: flex;
@@ -143,12 +171,15 @@
       align-items: center;
     }
 
-    .hero1{
-      margin-top: -0.5rem;
-      margin-left: 1.5rem;
+    .heroTextContainer{
+      margin-top: 2.5rem;
+      margin-left: 1rem;
+      justify-content: center;
+      text-align: center;
+      word-spacing: 0.1rem;
     }
 
-    .smallcontent {
+    .smallContent {
       padding-top: 1rem;
     }
 

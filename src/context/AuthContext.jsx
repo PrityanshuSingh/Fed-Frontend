@@ -2,20 +2,21 @@ import React, { useState, useEffect, useCallback, useMemo } from "react";
 
 let logoutTimer;
 
-
-
 const AuthContext = React.createContext({
   token: "",
   isLoggedIn: false,
   user: {
     name: "",
-    pic: "",
+    img: "",
     email: "",
-    rollNo: "",
+    rollNumber: "",
     school: "",
     college: "",
-    mobileNo: "",
+    contactNo: "",
     year: "",
+    github: "",
+    linkedin: "",
+    designation: "",
     access: "",
     regForm: [],
   },
@@ -25,6 +26,9 @@ const AuthContext = React.createContext({
   logout: () => {},
   settarget: () => {},
   update: () => {},
+  eventData: null,
+  memberData: null,
+  croppedImageFile:null,
 });
 
 const calculateRemainingTime = (expirationTime) => {
@@ -92,12 +96,15 @@ export const AuthContextProvider = (props) => {
   const loginHandler = (
     name,
     email,
-    pic,
-    rollNo,
+    img,
+    rollNumber,
     school,
     college,
-    mobileNo,
+    contactNo,
     year,
+    github,
+    linkedin,
+    designation,
     regForm,
     access,
     token,
@@ -106,13 +113,16 @@ export const AuthContextProvider = (props) => {
     localStorage.setItem("token", token);
     const setuserdata = {
       name: name,
-      pic: pic,
+      img: img,
       email: email,
-      rollNo: rollNo,
+      rollNumber: rollNumber,
       school: school,
       college: college,
-      mobileNo: mobileNo,
+      contactNo: contactNo,
       year: year,
+      github: github,
+      linkedin: linkedin,
+      designation: designation,
       access: access,
       regForm: regForm,
     };
@@ -134,24 +144,31 @@ export const AuthContextProvider = (props) => {
   const updateHandler = (
     name,
     email,
-    pic,
-    rollNo,
+    img,
+    rollNumber,
     school,
     college,
-    mobileNo,
+    contactNo,
     year,
+    github,
+    linkedin,
+    designation,
     access,
     regForm
   ) => {
+    console.log("update handler is called");
     const setuserdata = {
       name: name,
-      pic: pic,
+      img: img,
       email: email,
-      rollNo: rollNo,
+      rollNumber: rollNumber,
       school: school,
       college: college,
-      mobileNo: mobileNo,
+      contactNo: contactNo,
       year: year,
+      github: github,
+      linkedin: linkedin,
+      designation: designation,
       access: access,
       regForm: regForm,
     };
@@ -180,15 +197,12 @@ export const AuthContextProvider = (props) => {
       logout: logoutHandler,
       settarget: targetHandler,
       update: updateHandler,
+      eventData: null,
+      memberData: null,
+      croppedImageFile:null,
     }),
     [token, userIsLoggedIn, target, isAdmin]
   );
-
-
-  
-  
-
-  
 
   return (
     <AuthContext.Provider value={contextValue}>
@@ -196,6 +210,5 @@ export const AuthContextProvider = (props) => {
     </AuthContext.Provider>
   );
 };
-
 
 export default AuthContext;

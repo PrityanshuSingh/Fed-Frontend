@@ -1,29 +1,72 @@
-import React, { useRef, useState } from "react";
-import styles from "./styles/Core.module.scss";
-import { FaRegCalendarAlt, FaZhihu } from "react-icons/fa";
+import { forwardRef, useRef, useState } from "react";
+import PropTypes from "prop-types";
+import { FaRegCalendarAlt } from "react-icons/fa";
 import Select, { components } from "react-select";
 import DatePicker from "react-date-picker";
 import { AiOutlineDown } from "react-icons/ai";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import DatePickerWithTime from "react-datepicker";
+import styles from "./styles/Core.module.scss";
+
+const CustomInput = forwardRef(
+  ({ value, onClick, placeholder = "Select Date & Time" }, ref) => (
+    <div
+      onClick={onClick}
+      ref={ref}
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+      }}
+    >
+      <p
+        style={{
+          margin: "4px",
+          fontSize: "12px !important",
+          opacity: value ? 1 : 0.5,
+          fontWeight: "100 !important",
+        }}
+      >
+        {value || placeholder}
+      </p>
+      <FaRegCalendarAlt
+        color="#fff"
+        size={18}
+        style={{
+          position: "absolute",
+          top: "20%",
+          right: "8px",
+        }}
+      />
+    </div>
+  )
+);
+
+CustomInput.displayName = "CustomInput";
+
+CustomInput.propTypes = {
+  value: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
+};
 
 const customStyles = {
   control: (provided) => ({
     ...provided,
     display: "flex",
     outline: "none",
-    border: "none",
-    width: "100%",
+    width: "99.5%",
     fontSize: "12px",
     backgroundColor: "transparent",
     borderRadius: "4px",
     color: "#fff",
-    marginBottom: "8px",
-    maxHeight:"2rem",
+    marginBottom: "0",
+    maxHeight: "40px",
     marginLeft: "8px",
     marginRight: "8px",
     marginTop: "4px",
     position: "relative",
-    padding: "6px",
     border: "1px solid rgba(211, 211, 211, 0.5)",
     boxShadow: "none",
     "&:hover": {
@@ -32,23 +75,34 @@ const customStyles = {
   }),
   menu: (provided) => ({
     ...provided,
-    width: "100%",
-    color: "#333",
-    backgroundColor: "#fff",
-    marginTop:0,
-    marginLeft:8
+    width: "99.5%",
+    marginLeft: "8px",
   }),
-  menuList: (provided) => ({
+  menuPortal: (provided) => ({ ...provided, zIndex: 111 }),
+  placeholder: (provided) => ({
     ...provided,
-    padding: 0,
+    display: "flex",
+    alignItems: "center",
+    marginTop: "-7px",
   }),
   option: (provided, state) => ({
     ...provided,
-    color: state.isSelected ? "orange" : "#fff",
-    backgroundColor: "#333",
-    width:"100%",
+    color: state.isSelected ? "#FF8A00" : "#2D2D2D",
+    backgroundColor: state.isSelected ? "#2D2D2D" : "#fff",
+    cursor: "pointer",
+    width: "99%",
+    border: "none",
+    margin: "0 auto",
+    borderRadius: "4px",
     "&:hover": {
-      backgroundColor: "#33333390",
+      transition: "ease-in-out 0.3s",
+      backgroundColor: "#2D2D2D",
+      color: "#FF8A00",
+      margin: "2px auto",
+    },
+    "&:active": {
+      backgroundColor: "#2D2D2D",
+      color: "#FF8A00",
     },
   }),
   indicatorSeparator: (provided) => ({
@@ -58,6 +112,10 @@ const customStyles = {
   singleValue: (provided) => ({
     ...provided,
     color: "#fff",
+    display: "flex",
+    alignItems: "center",
+    marginTop: "-7px",
+    fontSize:"larger"
   }),
 };
 
@@ -69,7 +127,7 @@ const DropdownIndicator = (props) => {
         size={20}
         style={{
           position: "absolute",
-          right: "16px",
+          right: "12px",
           top: "25%",
         }}
       />
@@ -94,7 +152,17 @@ const Input = (props) => {
     ...rest
   } = props;
   const dateRef = useRef(null);
+  const fileRef = useRef(null);
+  const imgRef = useRef(null);
   const [showPassword, setshowPassword] = useState(false);
+  const [previewFile, setpreviewFile] = useState(null);
+
+  const filterPassedTime = (time) => {
+    const currentDate = new Date();
+    const selectedDate = new Date(time);
+
+    return currentDate.getTime() < selectedDate.getTime();
+  };
 
   const getInputTypes = () => {
     switch (type) {
@@ -116,7 +184,7 @@ const Input = (props) => {
         return (
           <input
             name={name}
-            className={styles.input}
+            className={`${styles.input} ${className}`}
             type={type}
             style={style || {}}
             placeholder={placeholder}
@@ -142,7 +210,7 @@ const Input = (props) => {
 
       case "select":
         return (
-          <>
+          <div>
             <Select
               name={name}
               placeholder={placeholder}
@@ -153,14 +221,15 @@ const Input = (props) => {
               components={{ DropdownIndicator }}
               isSearchable={false}
               className={className}
+              menuPosition="auto"
               {...rest}
             />
-          </>
+          </div>
         );
 
       case "date":
         return (
-          <>
+          <div>
             <DatePicker
               name={name}
               className={`${styles.input} ${styles.inputDate} ${className}`}
@@ -170,10 +239,42 @@ const Input = (props) => {
               onChange={onChange}
               clearIcon={null}
               style={style || {}}
-              calendarIcon={<FaRegCalendarAlt color="#fff" size={20} />}
+              minDate={new Date()}
+              calendarIcon={
+                <FaRegCalendarAlt
+                  color="#fff"
+                  size={18}
+                  style={{
+                    position: "absolute",
+                    top: "25%",
+                    right: "12px",
+                  }}
+                />
+              }
               {...rest}
             />
-          </>
+          </div>
+        );
+      case "datetime-local":
+        return (
+          <div className={`${styles.input} ${styles.inputDate} ${className}`}>
+            <DatePickerWithTime
+              name={name}
+              ref={dateRef}
+              value={value}
+              onChange={onChange}
+              clearIcon={null}
+              minDate={new Date()}
+              showTimeSelect
+              filterTime={filterPassedTime}
+              timeFormat="HH:mm"
+              timeIntervals={15}
+              timeCaption="time"
+              dateFormat="MMMM d, yyyy h:mm"
+              customInput={<CustomInput placeholder={placeholder} />}
+              {...rest}
+            />
+          </div>
         );
       case "radio":
         return (
@@ -242,7 +343,7 @@ const Input = (props) => {
 
       case "password":
         return (
-          <>
+          <div>
             <div
               style={{
                 position: "relative",
@@ -286,14 +387,128 @@ const Input = (props) => {
                 />
               )}
             </div>
-          </>
+          </div>
         );
-
+      case "file":
+        return (
+          <div
+            className={styles.input}
+            onClick={() => fileRef.current?.click()}
+            style={{
+              height: "40px",
+              cursor: "pointer",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              userSelect: "none",
+            }}
+          >
+            <input
+              ref={fileRef}
+              name={name}
+              type={type}
+              style={{
+                display: "none",
+              }}
+              placeholder={placeholder}
+              onChange={() => {
+                const e = {
+                  target: {
+                    value: fileRef.current.files[0],
+                  },
+                };
+                setpreviewFile(URL.createObjectURL(fileRef.current.files[0]));
+                onChange(e);
+              }}
+              {...rest}
+            />
+            {previewFile && (
+              <img
+                src={previewFile}
+                style={{
+                  height: "24px",
+                  width: "24px",
+                  borderRadius: "8px",
+                  marginRight: "8px",
+                }}
+              />
+            )}
+            <span
+              style={{
+                color: "#fff",
+                opacity: value ? 1 : 0.5,
+                width: "100%",
+                overflow: "hidden",
+              }}
+            >
+              {value || "No file selected"}
+            </span>
+          </div>
+        );
+      case "image":
+        return (
+          <div
+            className={styles.input}
+            onClick={() => {
+              imgRef.current?.click();
+            }}
+            style={{
+              height: "40px",
+              cursor: "pointer",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              userSelect: "none",
+            }}
+          >
+            <input
+              ref={imgRef}
+              name={name}
+              type={"file"}
+              accept="image/png, image/jpeg, image/jpg"
+              style={{
+                display: "none",
+              }}
+              placeholder={placeholder}
+              onChange={() => {
+                const e = {
+                  target: {
+                    value: imgRef.current.files[0],
+                  },
+                };
+                setpreviewFile(URL.createObjectURL(imgRef.current.files[0]));
+                onChange(e);
+              }}
+              {...rest}
+            />
+            {previewFile && (
+              <img
+                src={previewFile}
+                style={{
+                  height: "24px",
+                  width: "24px",
+                  borderRadius: "8px",
+                  marginRight: "8px",
+                }}
+              />
+            )}
+            <span
+              style={{
+                color: "#fff",
+                opacity: value ? 1 : 0.5,
+                width: "100%",
+                overflow: "hidden",
+              }}
+            >
+              {value || "No images selected"}
+            </span>
+          </div>
+        );
       default:
         return (
           <input
             name={name}
-            className={`${styles.input}  ${className}`}
+            className={styles.input}
             type={type}
             style={style || {}}
             placeholder={placeholder}
@@ -308,7 +523,11 @@ const Input = (props) => {
   return (
     <div
       className={`${styles.containerInput} ${containerClassName}`}
-      style={containerStyle || {}}
+      style={
+        containerStyle || {
+          marginTop: type === "select" ? "0" : "8px",
+        }
+      }
     >
       {showLabel && (
         <label
@@ -326,6 +545,40 @@ const Input = (props) => {
       {getInputTypes()}
     </div>
   );
+};
+
+Input.propTypes = {
+  type: PropTypes.oneOf([
+    "text",
+    "number",
+    "textarea",
+    "select",
+    "date",
+    "datetime-local",
+    "radio",
+    "checkbox",
+    "password",
+  ]),
+  containerStyle: PropTypes.object,
+  style: PropTypes.object,
+  placeholder: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.bool,
+  ]),
+  onChange: PropTypes.func.isRequired,
+  label: PropTypes.string,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      label: PropTypes.string,
+    })
+  ),
+  name: PropTypes.string,
+  showLabel: PropTypes.bool,
+  className: PropTypes.string,
+  containerClassName: PropTypes.string,
 };
 
 export default Input;

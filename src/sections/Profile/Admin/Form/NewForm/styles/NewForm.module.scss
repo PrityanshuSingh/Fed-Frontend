@@ -3,7 +3,25 @@
     justify-content: space-between;
     margin-top: 1.6em;
     width: 86%;
+    height: fit-content;
+    align-items: center;
   }
+  
+.buttonContainer {
+  font-size: 30px;
+  letter-spacing: 0.02em;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+}
+  
+.headInnerText span{
+  margin-right: 3px;
+  background: linear-gradient(to right , #d03e21 40%, #FF8A00 );
+  -webkit-background-clip: text;
+  color: transparent;
+  
+}
   .formInput {
     width: 90% !important;
     margin-bottom: 1.4em;

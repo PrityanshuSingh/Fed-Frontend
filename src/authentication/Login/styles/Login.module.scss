@@ -1,15 +1,19 @@
 .container {
-  background-color: #2f2f2f;
+  background-color: #2f2f2f90;
   border: 1px solid #ffffff61;
   border-radius: 10px;
+  background: linear-gradient(
+    90deg,
+    rgba(32, 32, 32, 0.95) -11.52%,
+    rgba(37, 37, 37, 0.95) 106.29%
+  );
   padding: 15px;
   justify-content: center;
   align-items: center;
-  width: 34vw;
+  width: 30rem;
   display: flex;
   flex-direction: row;
-  margin: 10% auto;
-
+  margin-top: 20%;
 }
 .form{
   width: auto;
@@ -71,12 +75,23 @@
   // overflow: hidden;
 }
 
+
 .ArrowBackIcon {
   position: absolute;
-  top: 5%;
-  left: 30px;
+  top: 1.5%;
+  left: 15px;
   color: #fff;
   cursor: pointer;
+  padding-top: 10px;
+  padding-left: -10px;
+  margin-right: 20px;
+}
+
+.divider{
+  height: 2px;
+  width: 5rem;
+  border-radius: 15px 15px;
+  background-color: #7c7a7a90;
 }
 
 @media (max-width: 800px) {
@@ -108,11 +123,11 @@
 
 @media (max-width: 1100px) {
   .container {
-     width: 60vw;
+     width: 28rem;
   }
 
   .login {
-    width: 60vw;
+    width: 100%;
   }
 
   .circle {
@@ -136,8 +151,9 @@
 @media (max-width: 500px) {
   .container {
     flex-direction: column;
-    width: 80vw;
-    margin-top: 50%;
+    width: 90vw;
+    margin-top: 40%;
+    margin-right: 10px;
   }
   .sideImage {
     display: none;

@@ -1,19 +1,35 @@
 .teamMember {
-  background-color: none;
   border-radius: 10px;
   text-align: center;
   color: white;
-  height: 20vw;
+  height: 23.5vw;
   z-index: 0;
   width: 20vw;
   cursor: pointer;
   margin-bottom: 4vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
+
 
 .teamMemberImg {
   width: fit-content;
   border-radius: 10px 10px 0 0;
   width: 100%;
+  height: 100%;
+}
+
+.ImgDiv{
+  height: 82%;
+  width: 100%;
+  background-color: #aeaeae;
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
+}
+.ImgDiv span{
+  margin-left: 0;
 }
 .teamMemberInfo {
   text-overflow: ellipsis;
@@ -24,13 +40,14 @@
 .teamMemberInfo h4 {
   padding: 10px;
   font-size: 1.2em;
-  padding-top: 5px;
 }
 
 .teamMemberInner {
   transition: transform 1s;
   transform-style: preserve-3d;
   border-radius: 10px;
+  height: 100%; //test
+  width: 100%;
 }
 
 .teamMember:hover .teamMemberInner {
@@ -85,6 +102,8 @@
   transform: rotateY(0deg);
   border-radius: 10px;
   transition: opacity 0.5s ease;
+  height: 100%; //test
+  width: 100%;
 }
 
 .teamMemberBack h5 {
@@ -139,9 +158,36 @@ button {
   margin-bottom: 15px;
 }
 
+.updatebtn{
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  width: 55%;
+}
+
+.updatebtn button{
+  border: 1px solid #fff;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: small;
+  background-color: #313131;
+}
+
+.updatebtn button:hover{
+  background-color: rgba(244, 128, 3, 0.84);
+  color: #fff;
+  transition: 0.2s ease-in-out;
+}
+
+
+
 /* Responsive styles */
 
 @media (max-width: 1024px) {
+  .teamMemberInfo h4 {
+    padding-top: 5px;
+  }
+  
   .teamMemberInfo h4 {
     font-size: 1em;
   }
@@ -158,12 +204,15 @@ button {
     font-size: 1rem;
   }
   .teamMember {
-    height: 18vw;
+    height: 23.6vw;
     width: 18vw;
   }
 }
 
 @media (max-width: 768px) {
+  .teamMemberInfo h4 {
+    padding-top: 5px;
+  }
   .teamMemberInfo h4 {
     font-size: 0.8em;
   }
@@ -182,12 +231,15 @@ button {
 }
 
 @media (max-width: 480px) {
+  .teamMemberInfo h4 {
+    padding-top: 5px;
+  }
   h2 {
     font-size: 2.5rem;
   }
 
   .teamMember {
-    height: 38vw;
+    height: 47vw;
     width: 38vw;
     margin-bottom: 10vw;
   }

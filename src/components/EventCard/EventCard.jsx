@@ -1,15 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import style from "./styles/EventCard.module.scss";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { Link } from "react-router-dom";
-import Share from '../../features/Modals/Event/ShareModal/ShareModal';
+import { Link, useNavigate } from "react-router-dom";
+import Share from "../../features/Modals/Event/ShareModal/ShareModal";
 import shareOutline from "../../assets/images/shareOutline.svg";
 import groupIcon from "../../assets/images/groups.svg";
 import rupeeIcon from "../../assets/images/rupeeIcon.svg";
-import ciLock from '../../assets/images/lock.svg'
 import { PiClockCountdownDuotone } from "react-icons/pi";
+import { IoIosLock, IoIosStats } from "react-icons/io";
+import { Button } from "../Core";
+import AuthContext from "../../context/AuthContext";
+import EventCardSkeleton from "../../layouts/Skeleton/EventCard/EventCardSkeleton";
+import { Blurhash } from "react-blurhash";
+import { Alert, MicroLoading } from "../../microInteraction";
 
 const EventCard = (props) => {
   const {
@@ -21,16 +26,55 @@ const EventCard = (props) => {
     showShareButton = true,
     showRegisterButton = true,
     additionalContent,
+    aosDisable,
+    onEdit,
+    enableEdit,
+    isLoading,
   } = props;
 
   const { info } = data;
-
+  const authCtx = useContext(AuthContext);
   const [isOpen, setOpen] = useState(false);
+  const [isHovered, setisHovered] = useState(false);
   const [remainingTime, setRemainingTime] = useState("");
   const [btnTxt, setBtnTxt] = useState("Register Now");
+  const navigate = useNavigate();
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [showSkeleton, setShowSkeleton] = useState(true);
+  const [isMicroLoading, setIsMicroLoading] = useState(false);
+  const [shouldNavigate, setShouldNavigate] = useState(false);
+  const [navigatePath, setNavigatePath] = useState("/");
+  const [alert, setAlert] = useState(null);
 
   useEffect(() => {
-    AOS.init({ duration: 2000 });
+    if (shouldNavigate) {
+      navigate(navigatePath);
+      setShouldNavigate(false); // Reset state after navigation
+    }
+  }, [shouldNavigate, navigatePath, navigate]);
+
+  useEffect(() => {
+    if (alert) {
+      const { type, message, position, duration } = alert;
+      Alert({ type, message, position, duration });
+      setAlert(null); // Reset alert after displaying it
+    }
+  }, [alert]);
+
+  useEffect(() => {
+    if (aosDisable) {
+      AOS.init({ disable: true });
+    } else {
+      AOS.init({ duration: 2000 });
+    }
+  }, [aosDisable]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSkeleton(false);
+    }, 2000); // Show skeleton for 2 seconds
+
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -91,14 +135,23 @@ const EventCard = (props) => {
   };
 
   useEffect(() => {
-    if (info.registrationClosed) {
+    if (info.isRegistrationClosed) {
       setBtnTxt("Closed");
     } else if (!remainingTime) {
       setBtnTxt("Register Now");
     } else {
       setBtnTxt(remainingTime);
     }
-  }, [info.registrationClosed, remainingTime]);
+  }, [info.isRegistrationClosed, remainingTime]);
+
+  useEffect(() => {
+    if (authCtx.isLoggedIn && authCtx.user.regForm ) {
+      const isRegistered = authCtx.user.regForm.includes(data.id);
+      if (isRegistered) {
+        setBtnTxt("Already Registered");
+      }
+    }
+  }, [authCtx.isLoggedIn, authCtx.user.regForm, btnTxt, navigate, data.id]);
 
   const handleShare = () => {
     setOpen(!isOpen);
@@ -108,32 +161,120 @@ const EventCard = (props) => {
     setOpen(false);
   };
 
+  const handleForm = () => {
+    if (authCtx.isLoggedIn) {
+      setIsMicroLoading(true);
+      if (authCtx.user.access !== "USER") {
+        setTimeout(() => {
+          setIsMicroLoading(false);
+          setBtnTxt("Already Member");
+        }, 1500);
+        // setAlert({
+        //   type: "info",
+        //   message: "Team Members are not allowed to register for the Event",
+        //   position: "bottom-right",
+        //   duration: 3000,
+        // });
+      } else {
+        setNavigatePath("/Events/" + data.id + "/Form");
+        setTimeout(() => {
+          setShouldNavigate(true);
+        }, 1000);
+
+        setTimeout(() => {
+          setIsMicroLoading(false);
+        }, 3000);
+      }
+    } else {
+      setIsMicroLoading(true);
+      sessionStorage.setItem("prevPage", window.location.pathname);
+      setNavigatePath("/login");
+
+      setTimeout(() => {
+        setShouldNavigate(true);
+      }, 1000);
+
+      setTimeout(() => {
+        setIsMicroLoading(false);
+      }, 3000);
+    }
+  };
+
   const url = window.location.href;
 
+  if (isLoading || showSkeleton) {
+    return <EventCardSkeleton />;
+  }
+
   return (
-    <>
-      <div className={style.card} style={customStyles.card} data-aos="fade-up">
-        <div className={style.backimg} style={customStyles.backimg} onClick={onOpen}>
-          <img srcSet={info.imageURL} className={style.img} style={customStyles.img} alt="Event" />
-          <div className={style.date} style={customStyles.date}>{formattedDate}</div>
+    <div>
+      <div
+        onMouseEnter={() => setisHovered(true)}
+        onMouseLeave={() => setisHovered(false)}
+        className={style.card}
+        style={customStyles.card}
+        // data-aos={aosDisable ? "" : "fade-up"}
+      >
+        <div
+          className={style.backimg}
+          style={customStyles.backimg}
+          onClick={onOpen}
+        >
+          {!imageLoaded && (
+            <Blurhash
+              hash="L6AcVvDi56n$C,T0IUbF{K-pNG%M"
+              width={"100%"}
+              height={200}
+              resolutionX={32}
+              resolutionY={32}
+              punch={1}
+            />
+          )}
+          <img
+            srcSet={info.eventImg}
+            className={style.img}
+            style={{
+              ...customStyles.img,
+              display: imageLoaded ? "block" : "none",
+            }}
+            alt="Event"
+            onLoad={() => setImageLoaded(true)}
+          />
+          <div className={style.date} style={customStyles.date}>
+            {formattedDate}
+          </div>
           {type === "ongoing" && showShareButton && (
-            <div className={style.share} style={customStyles.share} onClick={handleShare}>
-              <img className={style.shareIcon} style={customStyles.shareIcon} src={shareOutline} alt="Share" />
+            <div
+              className={style.share}
+              style={customStyles.share}
+              onClick={handleShare}
+            >
+              <img
+                className={style.shareIcon}
+                style={customStyles.shareIcon}
+                src={shareOutline}
+                alt="Share"
+              />
             </div>
           )}
         </div>
         <div className={style.backbtn} style={customStyles.backbtn}>
           <div className={style.eventname} style={customStyles.eventname}>
-            {info.eventName}
+            {info.eventTitle}
             {type === "ongoing" && (
               <p>
                 <img src={groupIcon} alt="Group" />
-                Team size: {info.minSize}{"-"}{info.maxSize} {" || "}
+                <span style={{ color: "white", paddingRight: "5px" }}>
+                  Team size:
+                </span>{" "}
+                {info.minTeamSize}
+                {"-"}
+                {info.maxTeamSize} {" | "}
                 <div className={style.price} style={customStyles.price}>
-                  {info.eventPrice ? (
+                  {info.eventAmount ? (
                     <p style={customStyles.eventnamep}>
                       <img src={rupeeIcon} alt="Rupee" />
-                      {info.eventPrice}
+                      {info.eventAmount}
                     </p>
                   ) : (
                     <p style={{ color: "inherit" }}>Free</p>
@@ -143,28 +284,48 @@ const EventCard = (props) => {
             )}
           </div>
           {type === "ongoing" && showRegisterButton && (
-            <div>
+            <div style={{ fontSize: ".9rem", color: "white" }}>
               <button
                 className={style.registerbtn}
                 style={{
                   ...customStyles.registerbtn,
                   cursor: btnTxt === "Register Now" ? "pointer" : "not-allowed",
                 }}
-                disabled={btnTxt === "Closed"}
+                onClick={handleForm}
+                disabled={
+                  btnTxt === "Closed" ||
+                  btnTxt === "Already Registered" ||
+                  btnTxt === "Already Member"
+                }
               >
                 {btnTxt === "Closed" ? (
                   <>
-                    <div style={{fontSize:"0.8rem"}}>Closed</div> <img src={ciLock} alt="" style={{marginLeft:"0px"}} />
+                    <div style={{ fontSize: "0.9rem" }}>Closed</div>{" "}
+                    <IoIosLock
+                      alt=""
+                      style={{ marginLeft: "0px", fontSize: "1rem" }}
+                    />
                   </>
+                ) : btnTxt === "Already Registered" ? (
+                  <>
+                    <div style={{ fontSize: "0.9rem" }}>Registered</div>{" "}
+                  </>
+                ) : isMicroLoading ? (
+                  <div style={{ fontSize: "0.9rem" }}>
+                    <MicroLoading />
+                  </div>
                 ) : (
                   <>
                     {remainingTime ? (
                       <>
                         <PiClockCountdownDuotone /> {btnTxt}
                       </>
+                    ) : btnTxt === "Already Member" ? (
+                      <>
+                        <div style={{ fontSize: "0.9rem" }}>Already Member</div>{" "}
+                      </>
                     ) : (
-                      <Link to={'/Events/'+data.id+"/Form"}><div style={{fontSize:"0.8rem"}}>{btnTxt}</div></Link>
-                   
+                      <div style={{ fontSize: "0.9rem" }}>Register Now</div>
                     )}
                   </>
                 )}
@@ -174,22 +335,60 @@ const EventCard = (props) => {
         </div>
         <div className={style.backtxt} style={customStyles.backtxt}>
           <div style={{ display: "flex", alignItems: "center" }}>
-            <div className={style.EventDesc} style={customStyles.EventDesc}>{info.description}</div>
+            <div className={style.EventDesc} style={customStyles.EventDesc}>
+              {info.eventdescription}
+            </div>
             <Link to={modalpath + data.id}>
-              <span onClick={handleCloseShare} className={style.seeMore} style={{
-                ...customStyles.seeMore,
-                marginLeft: "auto",
-                whiteSpace: "nowrap"
-              }}>
-                See More...
+              <span
+                onClick={handleCloseShare}
+                className={style.seeMore}
+                style={{
+                  ...customStyles.seeMore,
+                  marginLeft: "auto",
+                  whiteSpace: "nowrap",
+                  height: "fit-content",
+                }}
+              >
+                See More
               </span>
             </Link>
           </div>
           {additionalContent && <div>{additionalContent}</div>}
         </div>
       </div>
-      {isOpen && type === "ongoing" && <Share onClose={handleShare} urlpath={url + "/" + data.id} />}
-    </>
+      {isOpen && type === "ongoing" && (
+        <Share onClose={handleShare} urlpath={url + "/" + data.id} />
+      )}
+      {enableEdit && isHovered && authCtx.user.access === "ADMIN" && (
+        <div
+          onMouseEnter={() => setisHovered(true)}
+          onMouseLeave={() => setisHovered(false)}
+          className={style.hovered}
+        >
+          <Button
+            onClick={(e) => {
+              e.preventDefault();
+              if (onEdit) {
+                authCtx.eventData = data;
+                onEdit();
+              }
+            }}
+            variant="secondary"
+          >
+            Edit Event
+          </Button>
+          <Button variant="secondary">Delete Event</Button>
+          <IoIosStats
+            size={20}
+            style={{ cursor: "pointer", color: "white" }}
+            onClick={() => {
+              navigate("/profile/Events/Analytics/" + data.id);
+            }}
+          />
+        </div>
+      )}
+      <Alert />
+    </div>
   );
 };
 
@@ -202,13 +401,10 @@ EventCard.propTypes = {
   showShareButton: PropTypes.bool,
   showRegisterButton: PropTypes.bool,
   additionalContent: PropTypes.node,
-};
-
-EventCard.defaultProps = {
-  customStyles: {},
-  showShareButton: true,
-  showRegisterButton: true,
-  additionalContent: null,
+  aosDisable: PropTypes.bool,
+  onEdit: PropTypes.func,
+  enableEdit: PropTypes.bool,
+  isLoading: PropTypes.bool.isRequired,
 };
 
 export default EventCard;

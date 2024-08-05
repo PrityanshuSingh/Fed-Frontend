@@ -2,13 +2,14 @@
     {
       "access": "PRESIDENT",
       "name": "John Tech",
-      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0ZP9zTf75vBmTD9BJWQmf3DjamXGuvzw44w&s",
       "extra": {
         "linkedin": "https://www.linkedin.com/in/johndoe",
         "github": "https://github.com/johndoe",
         "title": "PRESIDENT",
         "know": "Check 123"
-      }
+      },
+      "blurhash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj"
     },
     {
       "access": "VICEPRESIDENT",
@@ -17,7 +18,7 @@
       "extra": {
         "linkedin": "https://www.linkedin.com/in/johndoe",
         "github": "https://github.com/johndoe",
-        "title": "VICEPRESIDENT",
+        "title": "VICE PRESIDENT",
         "know": "Check 123"
       }
     },
@@ -88,6 +89,116 @@
       }
     },
     {
+      "access": "TECHNICAL",
+      "name": "Grace Hall",
+      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "extra": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "title": "Sr. Executive",
+        "know": "Check 123"
+      }
+    },
+    {
+      "access": "TECHNICAL",
+      "name": "Joe Root",
+      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "extra": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "title": "Executive",
+        "know": "Check 123"
+      }
+    },
+    {
+      "access": "TECHNICAL",
+      "name": "Grace Hall",
+      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "extra": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "title": "Sr. Executive",
+        "know": "Check 123"
+      }
+    },
+    {
+      "access": "TECHNICAL",
+      "name": "Joe Root",
+      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "extra": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "title": "Executive",
+        "know": "Check 123"
+      }
+    },
+    {
+      "access": "OPERATION",
+      "name": "Jack Sparrow",
+      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "extra": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "title": "Sr. Executive",
+        "know": "Check 123"
+      }
+    },
+    {
+      "access": "OPERATION",
+      "name": "Jack Sparrow",
+      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "extra": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "title": "Sr. Executive",
+        "know": "Check 123"
+      }
+    },
+    {
+      "access": "OPERATION",
+      "name": "Jack Sparrow",
+      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "extra": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "title": "Sr. Executive",
+        "know": "Check 123"
+      }
+    },
+    {
+      "access": "OPERATION",
+      "name": "Jack Sparrow",
+      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "extra": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "title": "Sr. Executive",
+        "know": "Check 123"
+      }
+    },
+    {
+      "access": "OPERATION",
+      "name": "Jack Sparrow",
+      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "extra": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "title": "Sr. Executive",
+        "know": "Check 123"
+      }
+    },
+    {
+      "access": "OPERATION",
+      "name": "Jack Sparrow",
+      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "extra": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "title": "Sr. Executive",
+        "know": "Check 123"
+      }
+    },
+    {
       "access": "OPERATION",
       "name": "Jack Sparrow",
       "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
@@ -110,7 +221,228 @@
       }
     },
     {
+      "access": "MARKETING",
+      "name": "Jack Sparrow",
+      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "extra": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "title": "Sr. Executive",
+        "know": "Check 123"
+      }
+    },
+    {
+      "access": "MARKETING",
+      "name": "Jack Sparrow",
+      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "extra": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "title": "Sr. Executive",
+        "know": "Check 123"
+      }
+    },
+    {
+      "access": "MARKETING",
+      "name": "Jack Sparrow",
+      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "extra": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "title": "Sr. Executive",
+        "know": "Check 123"
+      }
+    },
+    {
+      "access": "MARKETING",
+      "name": "Jack Sparrow",
+      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "extra": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "title": "Sr. Executive",
+        "know": "Check 123"
+      }
+    },
+    {
+      "access": "MARKETING",
+      "name": "Jack Sparrow",
+      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "extra": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "title": "Sr. Executive",
+        "know": "Check 123"
+      }
+    },
+    {
+      "access": "MARKETING",
+      "name": "Jack Sparrow",
+      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "extra": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "title": "Sr. Executive",
+        "know": "Check 123"
+      }
+    },
+    
+    {
       "access": "CREATIVE",
+      "name": "John Doe",
+      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "extra": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "title": "Executive",
+        "know": "Check 123"
+      }
+    },
+    {
+      "access": "CREATIVE",
+      "name": "John Doe",
+      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "extra": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "title": "Executive",
+        "know": "Check 123"
+      }
+    },
+    {
+      "access": "CREATIVE",
+      "name": "John Doe",
+      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "extra": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "title": "Executive",
+        "know": "Check 123"
+      }
+    },
+    {
+      "access": "CREATIVE",
+      "name": "John Doe",
+      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "extra": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "title": "Executive",
+        "know": "Check 123"
+      }
+    },
+    {
+      "access": "CREATIVE",
+      "name": "John Doe",
+      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "extra": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "title": "Executive",
+        "know": "Check 123"
+      }
+    },
+    {
+      "access": "CREATIVE",
+      "name": "John Doe",
+      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "extra": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "title": "Executive",
+        "know": "Check 123"
+      }
+    },
+    {
+      "access": "CREATIVE",
+      "name": "John Doe",
+      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "extra": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "title": "Executive",
+        "know": "Check 123"
+      }
+    },
+    {
+      "access": "ALUMNI",
+      "name": "John Doe",
+      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "extra": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "title": "Executive",
+        "know": "Check 123"
+      }
+    },
+    {
+      "access": "ALUMNI",
+      "name": "John Doe",
+      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "extra": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "title": "Executive",
+        "know": "Check 123"
+      }
+    },
+    {
+      "access": "ALUMNI",
+      "name": "John Doe",
+      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "extra": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "title": "Executive",
+        "know": "Check 123"
+      }
+    },
+    {
+      "access": "ALUMNI",
+      "name": "John Doe",
+      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "extra": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "title": "Executive",
+        "know": "Check 123"
+      }
+    },
+    {
+      "access": "ALUMNI",
+      "name": "John Doe",
+      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "extra": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "title": "Executive",
+        "know": "Check 123"
+      }
+    },
+    {
+      "access": "ALUMNI",
+      "name": "John Doe",
+      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "extra": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "title": "Executive",
+        "know": "Check 123"
+      }
+    },
+    {
+      "access": "ALUMNI",
+      "name": "John Doe",
+      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "extra": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "title": "Executive",
+        "know": "Check 123"
+      }
+    },
+    {
+      "access": "ALUMNI",
       "name": "John Doe",
       "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
       "extra": {
@@ -132,7 +464,51 @@
       }
     },
     {
-      "access": "ALUMNI",
+      "access": "SPONSORSHIP",
+      "name": "John Doe",
+      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "extra": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "title": "Executive",
+        "know": "Check 123"
+      }
+    },
+    {
+      "access": "SPONSORSHIP",
+      "name": "John Doe",
+      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "extra": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "title": "Executive",
+        "know": "Check 123"
+      }
+    },
+    {
+      "access": "SPONSORSHIP",
+      "name": "John Doe",
+      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "extra": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "title": "Executive",
+        "know": "Check 123"
+      }
+    },
+    {
+      "access": "SPONSORSHIP",
+      "name": "John Doe",
+      "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+      "extra": {
+        "linkedin": "https://www.linkedin.com/in/johndoe",
+        "github": "https://github.com/johndoe",
+        "title": "Executive",
+        "know": "Check 123"
+      }
+    },
+    {
+      "access": "SPONSORSHIP",
       "name": "John Doe",
       "img": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
       "extra": {

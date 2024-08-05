@@ -37,7 +37,6 @@
     margin: 20px 0;
     background: linear-gradient(260deg, rgba(255, 190, 11, 0.84) -29.7%, rgba(244, 43, 3, 0.84) 128.34%);
     padding: 10px 25px;
-    border: 1px solid white;
     border-radius: 20px;
     color: #fff;
     font-weight: 500;
@@ -46,7 +45,8 @@
 }
 
 .errorImage button:hover {
-    background: linear-gradient(260deg, rgba(255, 190, 11, 1) -29.7%, rgba(244, 43, 3, 1) 128.34%);
+    transition: .2s linear;
+    background: linear-gradient(260deg, rgba(255, 190, 11, .9) -29.7%, rgba(244, 43, 3, .9) 128.34%);
 }
 
 @media (max-width: 768px) {

@@ -2,7 +2,6 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  color: #ffff;
 }
 
 .main {
@@ -132,6 +131,16 @@
   border-radius: 20px;
   position: relative;
   z-index: 0;
+}
+
+.error{
+  padding: 30px 70px;
+  z-index: 1;
+  text-align: center;
+  margin-top: 7rem;
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 7rem;
 }
 
 .pasteventCard {
@@ -275,6 +284,16 @@
       flex-direction: column;
       align-items: center;
     }
+
+    .error{
+      padding: 30px 70px;
+      z-index: 1;
+      text-align: center;
+      margin-top: 10px;
+      font-size: 1rem;
+      font-weight: 400;
+      margin-bottom: 10px;
+    }
   
     .outcard {
       height: 95%;
@@ -339,6 +358,17 @@
     flex-direction: column;
     align-items: center;
   }
+
+  .error{
+    padding: 30px 70px;
+    z-index: 1;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+
 
   .outcard {
     height: 95%;

@@ -20,8 +20,21 @@
   padding: 1em;
   border-radius: 8px;
   border: 0.5px solid transparent;
+  position: relative;
   background-color: rgba(128, 127, 126, 0.066);
   margin-bottom: 1em;
+}
+.disabledSec {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 8px;
+  background-color: #fd8e100e;
+  z-index: 10;
+  opacity: 0.8;
+  cursor: not-allowed;
 }
 .formFieldContainer:hover {
   border: 0.5px solid #ff88008c;
@@ -47,14 +60,30 @@
   flex-direction: column;
   width: 30%;
 }
-
-.popField {
+.sectionValidation {
   position: absolute;
-  bottom: -150%;
-  right: 0;
+  bottom: 0px;
+  right: 50px;
   background-color: rgb(41, 41, 41);
   border-radius: 4px;
   width: 500px;
+  max-height: 424px;
+  z-index: 1800 !important;
+  padding: 1em;
+  border: 1px solid #b8b7b78c;
+  margin-bottom: 2.4em;
+  overflow-y: auto;
+}
+.sectionValidation::-webkit-scrollbar {
+  width: 0px;
+}
+.popField {
+  position: absolute;
+  bottom: -120%;
+  right: 0;
+  background-color: rgb(41, 41, 41);
+  border-radius: 4px;
+  width: 600px;
   max-height: 424px;
   z-index: 1500 !important;
   padding: 1em;
@@ -75,4 +104,10 @@
   display: flex;
   flex-direction: column;
   width: 50%;
+}
+.bindInptContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 8px;
 }

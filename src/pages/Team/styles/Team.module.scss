@@ -1,19 +1,16 @@
-// .Teams {
-//   padding: 20px;
-// }
 
-h2 {
+.Team h2 {
   text-align: center;
   font-size: 50px;
   margin-top: 20px;
 }
 
-h2 span {
+.Team h2 span {
   color: #FF8A00;
 }
 
 .para p{
-  padding: 30px;
+  padding: 30px 70px;
   z-index: 1;
   text-align: center;
   margin-top: 10px;
@@ -21,6 +18,16 @@ h2 span {
   font-size: 20px;
   font-weight: 400;
   margin-bottom: 15px;
+}
+
+.error{
+  padding: 30px 70px;
+  z-index: 1;
+  text-align: center;
+  margin-top: 4rem;
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
 }
 
 .teamSection {
@@ -34,10 +41,10 @@ h2 span {
   font-size: 40px;
   color: #FF8A00;
   margin-bottom: 60px;
+  margin-left: 50px;
 }
 
 .teamSection span {
-  margin-left: 25px;
   font-weight: 800;
 }
 
@@ -68,35 +75,24 @@ strong {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 32px;
-  margin-top: 1.5rem;
-  margin-bottom: 4rem;
+  gap: 29px;
+  margin-top: -1rem;
 }
 
 
 
 
-// .circle {
-//   height: 50vh;
-//   width: 30vh;
-//   background-color: rgba(255, 92, 0, 0.19);
-//   position: absolute;
-//   top: 80%;
-//   left: -10%;
-//   border-radius: 50%;
-//   filter: blur(150px);
-// }
+.circle {
+  height: 50vh;
+  width: 30vh;
+  background-color: rgba(255, 92, 0, 0.69);
+  position: absolute;
+  top: 80%;
+  left: -10%;
+  border-radius: 50%;
+  filter: blur(150px);
+}
 
-// .circle2 {
-//   height: 50vh;
-//   width: 30vh;
-//   background-color: rgba(255, 92, 0, 0.19);
-//   position: absolute;
-//   // bottom: -700%;
-//   right: -5%;
-//   border-radius: 50%;
-//   filter: blur(150px);
-// }
 
 .alumniBut{
   display: flex;
@@ -110,7 +106,6 @@ strong {
 }
 
 .alumniBut a{
-  // color: #FF8A00;
   background: var(--primary);
   background-clip: text;
   color: transparent;
@@ -157,23 +152,32 @@ strong {
   //   // bottom: -200%;
   //   right: -25%;
   // }
-  // .circle {
-  //   left: -30%;
-  // }
+  .circle {
+    left: -30%;
+  }
 }
 
 @media (max-width: 768px) {
-  // .circle {
-  //   left: -20%;
-  // }
+  .circle {
+    left: -20%;
+  }
   // .circle2 {
   //   bottom: -500%;
   //   right: -20%;
   //   display: none;
   // }
 
+  .error{
+    padding: 30px 70px;
+    z-index: 1;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
 
-  h2 {
+  .Team h2 {
     font-size: 2.5rem;
   }
 
@@ -181,12 +185,11 @@ strong {
     font-size: 2em;
   }
 
-  .teamSection span {
-    margin-left: 5px;
-  }
 
   .para p{
-    font-size: 13px;
+    font-size: 1rem;
+    padding: 30px 30px;
+    line-height: auto;
   }
 }
 
@@ -203,29 +206,39 @@ strong {
     padding: 0;
   }
 
-  .lastRowCentered{
-    margin-top: 2.3rem;
-  }
-
   h3{
     text-align: center;
     font-size: 1.5rem;
   }
 
   .para p{
-    margin-bottom: -20px;
+    margin-bottom: 20px;
   }
 
-  h2 {
+  .Team h2 {
     font-size: 40px;
   }
-  // .circle {
-  //   left: -30%;
-  //   background-color: rgba(255, 92, 0, 0.59);
-  // }
+  .circle {
+    left: -30%;
+    background-color: rgba(255, 92, 0, 0.59);
+  }
 
-  .teamSection span {
-    margin-left: 5px;
+  .teamSection h3 {
+    margin-left: 0px;
+  }
+
+  .error{
+    padding: 30px 70px;
+    z-index: 1;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+
+  .lastRowCentered{
+    margin-top: 1rem;
   }
 
   // .circle2 {

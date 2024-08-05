@@ -12,15 +12,21 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  gap: 3rem 3rem;
+}
+
+.sponser_div{
   border-radius: 2.77rem; //border radius of outer container holding every card
   border: 0.88px solid rgba(255, 255, 255, 0.40);
   background: rgba(255, 255, 255, 0.10);
   backdrop-filter: blur(6.7px);
-  padding: 3rem 2rem;
-  margin-top: 2rem;
   width: 65rem;
-  gap: 3rem 3rem;
-  margin-bottom: 2rem;
+  height: 25rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .sponser_card {
@@ -60,26 +66,41 @@
 
 .bottom_line {
   width: 14rem;
-  margin-right: 0rem;
+  margin-left: 25rem;
   height: 0.3125rem;
   background: var(--primary);
   color: transparent;
   border-radius: 5px;
 }
+.customCarouselCard {
+  border: none;
+  width: 65rem;
+  height: 25rem;
+  box-shadow: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
 /* Media Queries */
 
 @media (max-width: 1024px) {
-  .sponser_all {
-    width: 90%;
-    padding: 4rem 0;
-    gap: 2rem;
-    margin-left: 2.2rem;
+
+  .sponser_div{
+    height: 20rem;
+    width: 55rem;
   }
+  .sponser_all{
+    width: 50rem;
+    margin-top: 5rem;
+    gap: 2rem;
+  }
+  
 
   .sponser_card {
-    height: 6rem;
-    width: 6rem;
+    height: 5rem;
+    width: 5rem;
   }
 
   .sponser_title {
@@ -92,20 +113,26 @@
 }
 
 @media (max-width: 768px) {
-
+  .sponser_div{
+    height: 20rem;
+    width: 45rem;
+  }
+  .sponser_all{
+    width: 45rem;
+    margin-top: 5rem;
+  }
 
   .sponser_container
   {
     padding-top: 1rem;
     align-items: center;
-    margin-right: 20px;
   }
-  .sponser_all {
-    width: 90%;
-    padding: 3rem 0;
-    gap: 1.5rem;
-    // z-index: 1;
-  }
+  // .sponser_all {
+  //   width: 90%;
+  //   padding: 3rem 0;
+  //   gap: 1.5rem;
+  //   // z-index: 1;
+  // }
 
   .sponser_card {
     height: 5rem;
@@ -125,11 +152,16 @@
 }
 
 @media (max-width: 480px) {
-
-
+  .sponser_div{
+    height: 20rem;
+    width: 22rem;
+  }
+  .sponser_all{
+    width: 22rem;
+  }
   .sponser_title {
     font-size: 30px;
-    margin-top: -15rem;
+    margin-top: -18rem;
     margin-right: 0;
    }
 
@@ -139,9 +171,8 @@
   }
 
   .sponser_container{
-    padding-top: 1rem;
+    padding-top: 3rem;
     align-items: center;
-    margin-right: 30px;
   }
 
 }

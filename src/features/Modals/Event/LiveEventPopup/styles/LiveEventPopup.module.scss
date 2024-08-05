@@ -21,8 +21,7 @@
 }
 
 .popupContent {
-  padding: 10px;
-  border-radius: 10px;
+  border-radius: 30px;
   position: relative;
   height: auto;
   width: auto;
@@ -30,7 +29,6 @@
   // max-height: 100%;
   text-align: center;
   background-color: none;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -40,14 +38,14 @@
 
 .closeButton {
   position: absolute;
-  top: 24px;
+  top: 2px;
   right: 14px;
   background: rgba(0, 0, 0, 0.7);
   border: 1px solid #fff;
   font-size: 1.5em;
   cursor: pointer;
   color: #fff;
-  padding: 2px 8px;
+  padding: 2px 12px;
   border-radius: 30%;
   display: flex;
   align-items: center;
@@ -61,7 +59,6 @@
   // max-height: 80vh;
   border-radius: 10px;
   object-fit: cover;
-  margin: 10px 0;
 }
 
 .lockScroll {
@@ -93,9 +90,10 @@
   }
 
   .closeButton {
-    top: 15px;
-    right: 4px;
+    top: 5px;
+    right: 10px;
     font-size: 1em;
+    padding: 0 7px;
   }
 
   .popupContent img {

@@ -1,20 +1,56 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext,useRef } from "react";
 import axios from "axios";
 import styles from "./styles/AddMemberForm.module.scss";
 import { Button, Input } from "../../../../../components";
 import AccessTypes from "../../../../../data/Access.json";
+import AuthContext from "../../../../../context/AuthContext";
+import { api } from "../../../../../services";
+import { EditImage } from "../../../../../features";
+// import {api} from "../../../../../services"
 
 function AddMemberForm() {
+  const authCtx = useContext(AuthContext);
   const [data, setData] = useState({
     name: "",
     email: "",
     access: "",
-    image: "",
+    img: "",
     linkedin: "",
     github: "",
     title: "",
-    know: "",
+    know: ""
   });
+  const [selectedFileName,setFileName]=useState(null);
+  const [croppedImageFile,setCroppedFile]=useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [imagePrv, setImagePrv] = useState(null);
+  const imgRef = useRef(null);
+  const [openModal, setOpenModal] = useState(false);
+
+  useEffect(() => {
+    if (authCtx.memberData) {
+
+      setData({
+        name: authCtx.memberData.name || "",
+        email: authCtx.memberData.email || "",
+        access: authCtx.memberData.access || "",
+        img: authCtx.memberData.img || "",
+        linkedin: authCtx.memberData?.extra?.linkedin || "",
+        github: authCtx.memberData?.extra?.github || "",
+        title: authCtx.memberData?.extra?.title || "",
+        know: authCtx.memberData?.extra?.know || ""
+      });
+    }
+  }, [authCtx.memberData]);
+
+  useEffect(()=>{
+    if(authCtx.croppedImageFile){
+      // setSelectedFile(authCtx.croppedImageFile);
+      const file = authCtx.croppedImageFile;
+      setCroppedFile(authCtx.croppedImageFile);
+      setData({ ...data, img: file.name });
+    }
+  },[authCtx.croppedImageFile])
 
   const [accessTypes, setAccessTypes] = useState([]);
 
@@ -24,55 +60,131 @@ function AddMemberForm() {
 
   const fetchAccessTypes = async () => {
     try {
-      // const response = await axios.get("/api/access/types"); // Adjust the endpoint URL as per your backend setup
-      // const fetchedAccessTypes = response.data.data;
-      // setAccessTypes(fetchedAccessTypes);
-      setAccessTypes(AccessTypes.data);
+      const response = await api.get("/api/user/fetchAccessTypes"); // Uncomment and use actual API
+      const fetchedAccessTypes = response.data.data;
+      setAccessTypes(fetchedAccessTypes);
+      // setAccessTypes(AccessTypes.data);
     } catch (error) {
       console.error("Error fetching access types:", error);
-      setAccessTypes([]);
+      setAccessTypes(AccessTypes.data);
     }
   };
 
   const isFormFilled = () => {
-    const { name, email, access, image, linkedin, github, title, know } = data;
-    return (
-      name.trim() !== "" &&
-      email.trim() !== "" &&
-      access.trim() !== "" &&
-      image.trim() !== "" &&
-      linkedin.trim() !== "" &&
-      github.trim() !== "" &&
-      title.trim() !== "" &&
-      know.trim() !== ""
-    );
+    const { name, email, access } = data;
+    return email.trim() !== "" && access.trim() !== "";
   };
 
-  const onAddMember = async () => {
+  const filterData = (data) => {
+    const filteredData = {};
+    const extra = {};
+
+    // Extract and add fields to `extra` if they are present and not empty
+    if (data.title.trim() !== "") {
+      extra.title = data.title;
+    }
+    if (data.github.trim() !== "") {
+      extra.github = data.github;
+    }
+    if (data.linkedin.trim() !== "") {
+      extra.linkedin = data.linkedin;
+    }
+    if (data.know.trim() !== "") {
+      extra.know = data.know;
+    }
+
+    // Add `extra` to `filteredData` if it's not empty
+    if (Object.keys(extra).length > 0) {
+      filteredData.extra = extra;
+    }
+
+    // Add other fields to `filteredData` if they are present and not empty
+    Object.keys(data).forEach((key) => {
+      if (key !== "title" && key !== "github" && key !== "linkedin" && key !== "know" && data[key].trim() !== "") {
+        filteredData[key] = data[key];
+      }
+    });
+
+    return filteredData;
+  };
+
+  const onAddOrUpdateMember = async () => {
     if (isFormFilled()) {
       try {
-        console.log("Member Data", data);
-        // const response = await axios.post("/api/members/add", data);
-        // console.log("Member added successfully:", response.data);
+        // setLoading(true);
+        const filteredData = filterData(data);
+        const formData = new FormData();
+  
+       
+        for (const key in filteredData) {
+          if (key !== "img") {
+            formData.append(key, filteredData[key]);
+          }
+        }
+  
+      
+        if (croppedImageFile) {
+          formData.append("image", croppedImageFile);
+        }
+  
+        console.log("Member Data", filteredData);
+        const response = await api.post("/api/user/addMember", formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+        console.log("Member added successfully:", response.data.user);
         setData({
           name: "",
           email: "",
           access: "",
-          image: "",
+          img: "",
           linkedin: "",
           github: "",
           title: "",
-          know: "",
+          know: ""
         });
         alert("Member Added Successfully");
       } catch (error) {
         console.error("Error adding member:", error);
         alert("Failed to add member. Please try again.");
+      } finally {
+        setLoading(false);
       }
     } else {
       alert("Please fill all the fields");
     }
   };
+  
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePrv(reader.result); 
+      };
+      reader.readAsDataURL(file);
+      setSelectedFile(file);
+      console.log("File in addmember comp:",croppedImageFile);
+      setData({ ...data, img: file.name });
+      setFileName(file.name);
+      setOpenModal(true);
+    }
+  };
+
+
+  const closeModal = () => {
+    setSelectedFile(null);
+    setOpenModal(false);
+  };
+
+
+  const updateImagePreview = (url) => {
+    setImagePrv(url);
+    // selectedFile(imageFile);
+  }
+  
 
   return (
     <div className={styles.main}>
@@ -107,15 +219,44 @@ function AddMemberForm() {
           value={data.access}
           onChange={(value) => setData({ ...data, access: value })}
         />
-        <Input
-          placeholder="Enter Member Image Link"
-          type="text"
-          label="Image"
-          className={styles.memberInput}
-          containerStyle={{ width: "100%" }}
-          value={data.image}
-          onChange={(e) => setData({ ...data, image: e.target.value })}
-        />
+           <div className={styles.imageInputContainer}>
+          {selectedFile && (
+            <EditImage
+              selectedFile={selectedFile}
+              setFile={setCroppedFile}
+              closeModal={closeModal}
+              setimgprv={updateImagePreview} // Pass the updated function
+              fileName = {selectedFileName}
+              // setImgFile={setCroppedFile}
+            />
+          )}
+
+{imagePrv &&
+          <div className={styles.imagePreview}>
+             <img src={imagePrv} alt="Preview" className={styles.image} />
+          </div>
+        }
+          <Input
+            placeholder="Enter Member Image File"
+            style={{"cursor":"pointer"}}
+            onClick={(e) => {
+              e.stopPropagation();
+              imgRef.current?.click();
+            }}
+            type="text"
+            label="Image"
+            className={styles.memberInput}
+            containerStyle={{ width: imagePrv?"90%":"100%" }}
+            value={data.img}
+            onChange={(e) => setData({ ...data, img: croppedImageFile })}
+          />
+          <input
+            style={{ display: "none" }}
+            type="file"
+            ref={imgRef}
+            onChange={handleFileChange}
+          />
+        </div>
       </div>
       <div className={styles.formHead}>
         <Input
@@ -157,9 +298,11 @@ function AddMemberForm() {
           containerStyle={{ width: "100%" }}
         />
       </div>
-      <Button onClick={onAddMember}>
-        Add Member
-      </Button>
+      <div className={styles.formHead}>
+        <Button onClick={onAddOrUpdateMember}>
+          {authCtx.memberData ? "Update Member" : "Add Member"}
+        </Button>
+      </div>
     </div>
   );
 }

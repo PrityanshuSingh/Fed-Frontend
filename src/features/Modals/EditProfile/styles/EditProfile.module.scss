@@ -1,33 +1,41 @@
 #profile {
-    color: #ffffff;
-    font-family: rubik;
-    font-weight: 300;
-    display: flex;
-    flex-direction: column;
-    margin-top: 10px;
-    padding-top: 20px;
-    padding-bottom: 10px;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    background: linear-gradient(
-    90deg,
-    rgba(32, 32, 32, 0.95) -11.52%,
-    rgba(37, 37, 37, 0.95) 106.29%
-  );
-  border-radius: 1.26863rem;
-  border: 1.2px solid rgba(214, 214, 214, 0.81);
-  }
+  color: #ffffff;
+  font-family: rubik;
+  font-weight: 300;
+  display: flex;
+  flex-direction: column;
+  padding-top: 0px;
+  padding-bottom: 10px;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  background: linear-gradient(
+  90deg,
+  rgba(32, 32, 32, 0.95) -11.52%,
+  rgba(37, 37, 37, 0.95) 106.29%
+);
+border-radius: 1.26863rem;
+border: 1.2px solid rgba(214, 214, 214, 0.81);
+}
+
+.flex{
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
   
-  .proHeading {
-    font-size: 35px;
-    letter-spacing: 0.02em;
-    line-height: 40px;
-    padding-bottom: 50px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.proHeading {
+  font-size: 35px;
+  letter-spacing: 0.02em;
+  line-height: 40px;
+  padding-bottom: 50px;
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
   .headInnerText{
     margin-inline: auto;
@@ -40,7 +48,7 @@
     font-size: 30px;
     position: absolute;
     cursor: pointer;
-    top: 0.75rem;
+    top: 0.55rem;
     right: 2rem;
   }
   
@@ -56,6 +64,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
   }
   
   .details{
@@ -63,11 +72,12 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin-top: -20px;
+    margin-top: -40px;
   }
 
   .email{
     cursor: not-allowed;
+    opacity: 0.5;;
   }
 
   .option{
@@ -76,28 +86,26 @@
 
   .submit{
     font-size: 15px;
+    width: 15rem;
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 10px;
-    margin-top: 20px;
+    margin-top: 25px;
+    margin-bottom: 10px;
     cursor: pointer;
-  }
-  
-  .dets,
-  .vals {
-    font-size: 20px;
   }
 
   .vals{
-    width: 15rem;
-    margin-right: 14px;
-    font-size: 20px;
+    width: 17rem;
+    font-size: 15px;
+    margin: 0px;
+    margin-right: 8px;
   }
   
   .dets {
     margin-top: 15px;
     padding-right: 100px;
-    font-size: 25px;
+    font-size: 20px;
   }
 
   @media screen and (max-width:600px) {
@@ -124,14 +132,15 @@
         display: grid;
     }
 
-    #profile{
-      margin-top: -30px;
+    #profile {
+      width: 100%;
     }
 
     .proHeading{
       margin-top: 40px;
       margin-bottom: 0px;
-      padding-bottom: 0px;
+      padding-bottom: 20px;
+      font-size: 30px;
     }
 
     .details{
@@ -139,14 +148,25 @@
     }
 
     .dets{
-        margin-left: 8px;
-        margin-top: 20px;
-        margin-bottom: -5px;
-    }
+      margin-left: 8px;
+      margin-top: 10px;
+      margin-bottom: -15px;
+      font-size: 17px;
+  }
+
+  .vals{
+    margin-left: -8px;
+  }
 
     .submit{
         margin-top: 25px;
     }
+
+    .closeModal{
+      top: 0.3rem;
+      right: 1rem;
+    }
+    
     }
 
   

@@ -40,8 +40,7 @@ function About() {
               <p className={styles.boxhead}><span style={{ background: "var(--primary)", WebkitBackgroundClip: "text", color: "transparent" }}>What</span> we do in FED?</p>
             <div className={styles.boxinnertext}>
               <p>Through our social media handles, we arrange</p>
-              <p>informative podcasts, high-quality events and </p>
-              <p>inspiring thought-provoking material.</p>
+              <p> high-quality events and inspiring ideas</p>
             </div>
           </div>
         </div>
